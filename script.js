@@ -110,7 +110,7 @@ if (rsvpForm) {
       return;
     }
 
-    emailjs.sendForm('service_pgxk1rn', 'template_mrbm77o', rsvpForm)
+    emailjs.sendForm('service_pgxk1rn', 'template_6icii1d', rsvpForm)
       .then(() => {
         showToast("RSVP inviato, grazie!");
         rsvpForm.reset();
