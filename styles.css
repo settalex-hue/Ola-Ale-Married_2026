@@ -1,6 +1,5 @@
 :root {
   --bg: #f7f4ee;
-  --surface: #ffffff;
   --text: #2f3a34;
   --muted: #6a6f65;
   --accent: #7a8f7f;
@@ -9,40 +8,51 @@
   --shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
 
-/* RESET E BASE */
-* { box-sizing: border-box; margin: 0; padding: 0; }
+/* 1. RESET TOTALE PER EVITARE ELEMENTI GIGANTI */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-body {
+html, body {
+  width: 100%;
+  overflow-x: hidden; /* Fondamentale: impedisce lo scorrimento laterale */
   font-family: 'Inter', sans-serif;
   background-color: var(--bg);
   color: var(--text);
-  line-height: 1.6;
-  overflow-x: hidden;
-  width: 100%;
+  line-height: 1.5;
 }
 
-img { max-width: 100%; height: auto; display: block; }
+img {
+  max-width: 100%; /* Impedisce alle immagini di diventare giganti */
+  height: auto;
+  display: block;
+}
 
-/* BUSTA INIZIALE - OTTIMIZZATA */
+/* 2. BUSTA E INTRO */
 .envelope-intro {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: #fdfdfd;
+  background: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.6s ease;
 }
-.envelope-intro.closing { opacity: 0; pointer-events: none; }
+
+.envelope-intro.closing {
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.6s;
+}
 
 .envelope-container {
-  width: min(320px, 85vw);
+  width: min(300px, 80vw);
   height: 200px;
   background: var(--accent);
   position: relative;
   cursor: pointer;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
 }
 
 .envelope-flap {
@@ -50,52 +60,47 @@ img { max-width: 100%; height: auto; display: block; }
   top: 0; left: 0; width: 100%; height: 100%;
   background: var(--accent-dark);
   clip-path: polygon(0 0, 100% 0, 50% 60%);
+  transition: transform 0.5s;
   z-index: 2;
-  transition: transform 0.5s ease;
 }
 
-.open .envelope-flap { transform: rotateX(180deg); transform-origin: top; }
-
-.seal {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 60px; height: 60px;
-  background: #fff;
-  border-radius: 50%;
-  z-index: 3;
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Alex Brush', cursive;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+.open .envelope-flap {
+  transform: rotateX(180deg);
+  transform-origin: top;
 }
 
-/* HEADER */
+/* 3. HEADER */
 .site-header {
-  position: sticky;
-  top: 0; z-index: 100;
-  background: rgba(247, 244, 238, 0.95);
-  display: flex; justify-content: space-between; align-items: center;
+  width: 100%;
   padding: 15px 20px;
-  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(247, 244, 238, 0.9);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
-.brand { font-family: 'Alex Brush', cursive; font-size: 1.8rem; }
-.main-nav { display: none; } /* Nascondiamo nav su mobile per evitare confusione */
+.main-nav {
+  display: none; /* Nascondiamo su mobile per evitare sovrapposizioni */
+}
 
 @media (min-width: 768px) {
   .main-nav { display: flex; gap: 20px; }
-  .main-nav a { text-decoration: none; color: var(--text); font-weight: 500; font-size: 0.9rem; }
 }
 
-/* HERO SECTION - CORREZIONE SOVRAPPOSIZIONI */
+/* 4. HERO SECTION - ADATTIVA */
 .hero-section {
   position: relative;
-  min-height: 80vh; /* Ridotto per mobile */
+  width: 100%;
+  min-height: 70vh; /* Si adatta all'altezza dello schermo */
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 40px 20px;
   text-align: center;
+  padding: 40px 20px;
 }
 
 .hero-bg {
@@ -108,108 +113,92 @@ img { max-width: 100%; height: auto; display: block; }
 
 .hero-title {
   font-family: 'Alex Brush', cursive;
-  font-size: clamp(2.8rem, 12vw, 5rem);
+  font-size: clamp(2.5rem, 10vw, 4.5rem); /* Testo fluido */
   color: var(--accent-dark);
-  margin: 15px 0;
-  line-height: 1.1;
+  margin-bottom: 10px;
+  word-wrap: break-word; /* Impedisce al testo di uscire dai bordi */
 }
 
-.hero-subtitle { font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
-
-/* COUNTDOWN - GRIGLIA PULITA */
+/* 5. COUNTDOWN - NON PIÙ COPERTO */
 .countdown {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* Se non c'è spazio, va a capo invece di sovrapporsi */
   justify-content: center;
   gap: 10px;
-  margin: 30px 0;
+  margin: 20px 0;
+  width: 100%;
 }
 
 .countdown span {
   background: white;
-  width: 75px; /* Fisso per non farlo saltare */
-  padding: 12px 5px;
-  border-radius: 10px;
+  min-width: 70px;
+  padding: 10px;
+  border-radius: 8px;
   box-shadow: var(--shadow);
 }
 
-.countdown strong { display: block; font-size: 1.4rem; color: var(--accent); }
-.countdown small { font-size: 0.65rem; text-transform: uppercase; color: var(--muted); }
+.countdown strong { display: block; font-size: 1.2rem; color: var(--accent); }
+.countdown small { font-size: 0.7rem; color: var(--muted); }
 
-/* SEZIONI E GRIGLIE */
-.section { padding: 60px 20px; max-width: 1100px; margin: 0 auto; }
-.section-intro { text-align: center; margin-bottom: 40px; }
-.section-intro h2 { font-family: 'Alex Brush', cursive; font-size: 2.8rem; color: var(--accent-dark); }
+/* 6. SEZIONI E GRIGLIE - IL CUORE DEL PROBLEMA */
+.section {
+  padding: 60px 20px;
+  max-width: 100%;
+}
 
+.section-intro { text-align: center; margin-bottom: 30px; }
+.section-intro h2 { font-family: 'Alex Brush', cursive; font-size: 2.5rem; }
+
+/* Griglie che diventano singola colonna su mobile */
 .location-grid, .final-grid, .guestbook-grid {
   display: grid;
-  grid-template-columns: 1fr; /* Una colonna su mobile */
-  gap: 30px;
+  grid-template-columns: 1fr; /* Una colonna di default */
+  gap: 20px;
+  width: 100%;
 }
 
 @media (min-width: 768px) {
-  .location-grid { grid-template-columns: 1fr 1fr; align-items: center; }
+  .location-grid { grid-template-columns: 1fr 1fr; }
   .final-grid { grid-template-columns: repeat(3, 1fr); }
   .guestbook-grid { grid-template-columns: 1fr 1fr; }
 }
 
-/* CARD E FORM */
+/* CARD - EVITIAMO ALTEZZE FISSE */
 .rsvp-form, .event-card, .info-card, .final-card, .foto-card, .guestbook-form {
   background: white;
-  padding: 25px;
-  border-radius: 15px;
+  padding: 20px;
+  border-radius: 12px;
   box-shadow: var(--shadow);
+  width: 100%;
 }
 
+/* 7. FORM E INPUT - FULL WIDTH */
 input, textarea, select {
   width: 100%;
   padding: 12px;
-  margin: 8px 0 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-family: inherit;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px; /* Evita lo zoom automatico su iPhone */
 }
 
 .button {
+  display: block;
   width: 100%;
   padding: 15px;
   background: var(--accent);
   color: white;
-  border: none;
-  border-radius: 30px;
-  font-weight: 600;
-  cursor: pointer;
+  text-align: center;
+  border-radius: 25px;
   text-decoration: none;
-  display: inline-block;
-  text-align: center;
+  font-weight: bold;
 }
 
-/* TIMELINE PROGRAMMA MOBILE */
-.timeline { position: relative; padding-left: 20px; }
-.timeline-event { margin-bottom: 30px; }
-.time { font-weight: bold; color: var(--gold); display: block; margin-bottom: 5px; }
-
-/* GUESTBOOK */
-.guestbook-messages {
-  max-height: 400px;
-  overflow-y: auto;
-  padding: 10px;
-}
-
-.guestbook-message {
-  background: #fdfdfd;
-  padding: 15px;
-  margin-bottom: 15px;
-  border-left: 4px solid var(--accent);
-  border-radius: 4px;
-}
-
-/* FOOTER */
+/* 8. FOOTER */
 .site-footer {
-  text-align: center;
   padding: 40px 20px;
   background: var(--text);
   color: white;
+  text-align: center;
 }
-
-.site-footer h2 { font-family: 'Alex Brush', cursive; font-size: 2rem; margin-bottom: 10px; }
