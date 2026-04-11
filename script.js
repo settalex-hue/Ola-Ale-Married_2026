@@ -1,39 +1,91 @@
 // ==========================================
 // SICUREZZA INIZIALE EMAILJS
 // ==========================================
+// Inizializziamo EmailJS all'inizio, ma con un try/catch
+// così se l'adblocker lo blocca, il resto del sito funziona.
 try {
-  if (typeof emailjs !== 'undefined') {
-    emailjs.init("uml8QCRY1Ba5qjr80");
-  }
+  // Sostituisci "YOUR_PUBLIC_KEY" con la tua Public Key reale di EmailJS
+  emailjs.init("uml8QCRY1Ba5qjr80"); 
 } catch (e) {
-  console.warn("Libreria EmailJS bloccata (es. Adblocker). Le mail potrebbero non funzionare.");
+  console.warn("EmailJS non inizializzato (probabilmente bloccato da AdBlock). L'invio RSVP potrebbe non funzionare.");
 }
 
 // ==========================================
-// VARIABILI GLOBALI
+// VARIABILI GLOBALI E DOM
 // ==========================================
 const envelopeIntro = document.getElementById("envelopeIntro");
 const sealButton = document.getElementById("sealButton");
+const letter = document.querySelector(".letter");
+const siteShell = document.querySelector(".site-shell");
 const toast = document.getElementById("toast");
 const guestbookForm = document.getElementById("guestbookForm");
 const messageList = document.getElementById("messageList");
 const rsvpForm = document.getElementById("rsvpForm");
-const homeSection = document.getElementById("home");
-let introAnimated = false;
+
+let introAnimated = false; // Flag per evitare doppie animazioni
 
 // ==========================================
-// GESTIONE COUNTDOWN (Reso Anti-Blocco)
+// GESTIONE ANIMAZIONE BUSTA (CORRETTA)
+// ==========================================
+function openEnvelope() {
+  if (introAnimated) return; // Evita di rieseguire se già cliccato
+  introAnimated = true;
+  
+  // 1. Apri la busta (JavaScript aggiunge la classe CSS)
+  if (envelopeIntro) {
+    envelopeIntro.classList.add("open");
+  }
+
+  // 2. Fai emergere il biglietto (dopo 1 secondo)
+  setTimeout(() => {
+    if (letter) {
+      letter.classList.add("visible");
+    }
+  }, 1000);
+
+  // 3. Nascondi l'intro e mostra la Home (dopo 4.5 secondi totali)
+  setTimeout(() => {
+    if (envelopeIntro) {
+      envelopeIntro.classList.add("closing");
+    }
+    
+    // Mostriamo la Home
+    if (siteShell) {
+      siteShell.classList.add("visible");
+    }
+
+    // Scrolliamo dolcemente verso la Home
+    const homeSection = document.getElementById("home");
+    if (homeSection) {
+      homeSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    // Rimuoviamo definitivamente l'intro dal DOM dopo la transizione CSS
+    setTimeout(() => {
+      if (envelopeIntro) envelopeIntro.style.display = "none";
+    }, 800); // Durata della transizione 'closing'
+
+  }, 4500);
+}
+
+// Aggiungiamo l'evento al sigillo
+if (sealButton) {
+  sealButton.addEventListener("click", openEnvelope);
+}
+
+// ==========================================
+// GESTIONE COUNTDOWN
 // ==========================================
 const targetDate = new Date("2026-09-26T11:00:00").getTime();
 
 function updateCountdown() {
-  // Peschiamo gli elementi ogni secondo, così anche se cambiano lingua, non si rompono
+  // Peschiamo gli elementi ogni secondo (resiste al cambio lingua)
   const dEl = document.getElementById("days");
   const hEl = document.getElementById("hours");
   const mEl = document.getElementById("minutes");
   const sEl = document.getElementById("seconds");
 
-  if (!dEl || !hEl || !mEl || !sEl) return;
+  if (!dEl || !hEl || !mEl || !sEl) return; // Sicurezza
 
   const now = new Date().getTime();
   const diff = targetDate - now;
@@ -57,11 +109,12 @@ function updateCountdown() {
   sEl.innerText = String(seconds).padStart(2, "0");
 }
 
-setInterval(updateCountdown, 1000);
+// Avviamo il countdown subito e poi ogni secondo
 updateCountdown();
+setInterval(updateCountdown, 1000);
 
 // ==========================================
-// FUNZIONE CALENDARIO (SAVE THE DATE)
+// FUNZIONE SAVE THE DATE (Calendario)
 // ==========================================
 function aggiungiAlCalendario() {
   const titolo = "Matrimonio Aleksandra & Alessandro";
@@ -92,66 +145,43 @@ function aggiungiAlCalendario() {
 }
 
 // ==========================================
-// GESTIONE RSVP CON EMAILJS
+// GESTIONE RSVP CON EMAILJS (Anti-Blocco)
 // ==========================================
 if (rsvpForm) {
-  rsvpForm.addEventListener("submit", (event) => {
+  rsvpForm.addEventListener("submit", function(event) {
     event.preventDefault();
     
-    const btn = rsvpForm.querySelector('button');
-    const originalText = btn.innerText;
-    btn.innerText = "Invio in corso...";
-    btn.disabled = true;
-
+    // Controllo se EmailJS è disponibile
     if (typeof emailjs === 'undefined') {
-      alert("Servizio email attualmente bloccato. Riprova disattivando l'adblocker.");
-      btn.innerText = originalText;
-      btn.disabled = false;
+      alert("Il servizio di invio email è momentaneamente bloccato (probabilmente da un AdBlocker). Ti preghiamo di disattivarlo e riprovare, o di contattarci direttamente.");
       return;
     }
 
-    emailjs.sendForm('service_pgxk1rn', 'template_6icii1d', rsvpForm)
+    const btn = rsvpForm.querySelector('button');
+    if (btn) {
+        btn.innerText = "Invio in corso...";
+        btn.disabled = true;
+    }
+
+    // Sostituisci con i tuoi ID reali di EmailJS
+    const serviceID = 'service_pgxk1rn';
+    const templateID = 'template_mrbm77o';
+
+    emailjs.sendForm(serviceID, templateID, this)
       .then(() => {
-        showToast("RSVP inviato, grazie!");
+        showToast("Conferma inviata correttamente!");
         rsvpForm.reset();
-        btn.innerText = originalText;
-        btn.disabled = false;
       }, (err) => {
-        alert("Errore nell'invio: " + JSON.stringify(err));
-        btn.innerText = "Riprova";
-        btn.disabled = false;
+        console.error("Errore EmailJS:", err);
+        alert("Si è verificato un errore nell'invio. Riprova più tardi.");
+      })
+      .finally(() => {
+        if (btn) {
+            btn.innerText = "Invia conferma";
+            btn.disabled = false;
+        }
       });
   });
-}
-
-// ==========================================
-// GESTIONE ANIMAZIONE BUSTA
-// ==========================================
-function openEnvelope() {
-  if (introAnimated) return;
-  introAnimated = true;
-  
-  if (envelopeIntro) envelopeIntro.classList.add("open");
-  if (sealButton) sealButton.style.pointerEvents = "none";
-
-  setTimeout(() => {
-    const letter = document.querySelector(".letter");
-    if (letter) letter.classList.add("visible");
-  }, 1000);
-
-  setTimeout(() => {
-    if (envelopeIntro) {
-      envelopeIntro.classList.add("closing");
-      setTimeout(() => {
-        envelopeIntro.style.display = "none";
-      }, 800);
-    }
-    if (homeSection) homeSection.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, 4500);
-}
-
-if (sealButton) {
-  sealButton.addEventListener("click", openEnvelope);
 }
 
 // ==========================================
@@ -161,11 +191,11 @@ function showToast(message) {
   if (!toast) return;
   toast.textContent = message;
   toast.classList.add("show");
-  setTimeout(() => toast.classList.remove("show"), 2600);
+  setTimeout(() => toast.classList.remove("show"), 3000);
 }
 
 // ==========================================
-// GESTIONE GUESTBOOK LOCALE
+// GUESTBOOK LOCALE (Anti-Blocco)
 // ==========================================
 function loadGuestMessages() {
   if (!messageList) return;
@@ -173,10 +203,12 @@ function loadGuestMessages() {
     const saved = localStorage.getItem("guestbookMessages");
     if (!saved) return;
     const messages = JSON.parse(saved);
-    messageList.innerHTML = messages
-      .map(item => `<div class="guestbook-message"><strong>${item.name}</strong><p>${item.message}</p></div>`)
-      .join("");
-  } catch(e) { console.warn("Guestbook non caricato", e); }
+    if (messages.length > 0) {
+        messageList.innerHTML = messages
+          .map(item => `<div class="guestbook-message"><strong>${item.name}</strong><p>${item.message}</p></div>`)
+          .join("");
+    }
+  } catch(e) { console.warn("Impossibile caricare i messaggi del guestbook (localStorage disabilitato?)."); }
 }
 
 function saveGuestMessage(name, message) {
@@ -184,218 +216,107 @@ function saveGuestMessage(name, message) {
     const saved = localStorage.getItem("guestbookMessages");
     const messages = saved ? JSON.parse(saved) : [];
     messages.unshift({ name, message, date: new Date().toISOString() });
-    localStorage.setItem("guestbookMessages", JSON.stringify(messages.slice(0, 10)));
+    localStorage.setItem("guestbookMessages", JSON.stringify(messages.slice(0, 50))); // Salviamo max 50 messaggi
     loadGuestMessages();
-  } catch(e) { console.warn("Errore salvataggio", e); }
+  } catch(e) { console.warn("Impossibile salvare il messaggio (localStorage pieno o disabilitato)."); }
 }
 
 if (guestbookForm) {
   guestbookForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const formData = new FormData(guestbookForm);
-    const name = formData.get("guestName").trim();
-    const message = formData.get("guestMessage").trim();
-    if (!name || !message) return;
-    saveGuestMessage(name, message);
+    const name = formData.get("guestName");
+    const message = formData.get("guestMessage");
+    if (!name || !message || name.trim() === "" || message.trim() === "") {
+        alert("Compila tutti i campi del guestbook.");
+        return;
+    }
+    saveGuestMessage(name.trim(), message.trim());
     guestbookForm.reset();
-    showToast("Messaggio aggiunto al guestbook!");
+    showToast("Messaggio aggiunto!");
   });
 }
 
+// Carichiamo i messaggi esistenti all'avvio
 loadGuestMessages();
 
 // ==========================================
-// SCROLL MORBIDO NAVIGAZIONE
+// SCROLL MORBIDO NAVIGAZIONE (Anti-Blocco)
 // ==========================================
 const navLinks = document.querySelectorAll(".main-nav a");
 navLinks.forEach((link) => {
   link.addEventListener("click", (event) => {
-    if (link.hash.startsWith("#")) {
+    const hash = link.hash;
+    if (hash && hash.startsWith("#")) {
       event.preventDefault();
-      const target = document.querySelector(link.hash);
-      if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+      const target = document.querySelector(hash);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     }
   });
 });
 
 // ==========================================
-// TRADUZIONI CON SISTEMA ANTI-CRASH
+// TRADUZIONI (SISTEMA SICURO)
 // ==========================================
 const translations = {
   it: {
     home: "Home", location: "Location", programma: "Programma", rsvp: "RSVP", foto: "Foto", guestbook: "Guestbook",
-    heroSubtitle: "Il matrimonio di", heroTitle: "Aleksandra & Alessandro", heroDate: "26 Settembre 2026", heroTime: "Ore 11:00",
-    days: "giorni", hours: "ore", minutes: "minuti", seconds: "secondi", saveDate: "Save the Date",
-    locationTitle: "Location", locationDesc: "Dove celebreremo il nostro amore",
-    programmaTitle: "Programma", programmaDesc: "La giornata più bella", cerimonia: "Cerimonia", cerimoniaDesc: "Scambio delle promesse",
-    aperitivo: "Aperitivo", aperitivoDesc: "Brindisi e stuzzichini", pranzo: "Pranzo di nozze", pranzoDesc: "Banchetto nuziale",
-    torta: "Taglio della torta", tortaDesc: "Dolce momento insieme",
-    rsvpTitle: "RSVP", rsvpDesc: "Conferma la tua presenza", nome: "Nome e Cognome", nomePlaceholder: "Inserisci il tuo nome",
-    email: "Email", emailPlaceholder: "email@example.com", partecipi: "Parteciperai?", si: "Sì, ci sarò!", no: "Purtroppo non potrò",
-    ospiti: "Numero di ospiti", allergie: "Allergie o diete speciali", allergiePlaceholder: "Es: vegetariano, celiaco, allergie...",
-    messaggio: "Un messaggio per gli sposi", messaggioPlaceholder: "Scrivi un pensiero...", invia: "Invia conferma", grazie: "Grazie! Riceverai presto un messaggio di conferma.",
-    portamiLi: "Portami lì", fotoTitle: "Condividi le Foto", fotoDesc: "Cattura i momenti magici", fotoText: "Scansiona il QR code per caricare le tue foto direttamente nel nostro cloud condiviso. Ogni momento conta!",
-    scansiona: "Scansiona per caricare",
-    guestbookTitle: "Guestbook", guestbookDesc: "Lascia un pensiero", tuoNome: "Il tuo nome", tuoNomePlaceholder: "Il tuo nome",
-    scriviMessaggio: "Scrivi il tuo messaggio agli sposi...", lasciaMessaggio: "Lascia il tuo messaggio", primo: "Sii il primo a lasciare un messaggio!",
-    dressCode: "Dress Code", comeVestirsi: "Come vestirsi", elegante: "Elegante formale", abito: "Abito lungo o midi per le signore, completo scuro per i signori",
-    colori: "Colori consigliati", tonalita: "Tonalità pastello, verde salvia, beige, rosa cipria. Evitare il bianco (riservato alla sposa)",
-    alloggio: "Alloggio", doveSoggiornare: "Dove soggiornare", strutture: "Le strutture convenzionate saranno disponibili a breve",
-    cosaAspettarsi: "Cosa Aspettarsi", matrimonio: "Un matrimonio italo-polacco", paneSale: "Pane e Sale", paneDesc: "Tradizione polacca di benvenuto agli sposi con pane (prosperità) e sale (protezione dalle difficoltà)",
-    tradizioniPolacche: "TRADIZIONI POLACCHE", pranzoItaliano: "Il pranzo italiano", pranzoItalianoDesc: "Preparatevi per un banchetto con antipasti, primi, secondi e dolci. Il pasto italiano è un'esperienza lunga e conviviale!",
-    tradizioniItaliane: "TRADIZIONI ITALIANE", vodka: "Vodka", vodkaDesc: "Tradizione polacca del brindisi: 'Na zdrowie!' (Alla salute!) - preparatevi a festeggiare con i classici shot polacchi",
+    heroSubtitle: "Il matrimonio di", heroDate: "26 Settembre 2026", heroTime: "Ore 11:00",
+    labelDays: "giorni", labelHours: "ore", labelMinutes: "minuti", labelSeconds: "secondi", saveDate: "Save the Date",
+    confirmTitle: "Conferma la tua presenza",
+    // Aggiungi qui altre traduzioni se necessario
   },
   pl: {
     home: "Dom", location: "Lokalizacja", programma: "Program", rsvp: "RSVP", foto: "Zdjęcia", guestbook: "Księga gości",
-    heroSubtitle: "Ślub", heroTitle: "Aleksandra & Alessandro", heroDate: "26 września 2026", heroTime: "Godzina 11:00",
-    days: "dni", hours: "godziny", minutes: "minuty", seconds: "sekundy", saveDate: "Zapisz datę",
-    locationTitle: "Lokalizacja", locationDesc: "Gdzie będziemy świętować naszą miłość",
-    programmaTitle: "Program", programmaDesc: "Najpiękniejszy dzień", cerimonia: "Ceremonia", cerimoniaDesc: "Wymiana przysiąg",
-    aperitivo: "Aperitif", aperitivoDesc: "Tosty i przekąski", pranzo: "Obiad weselny", pranzoDesc: "Uroczysta kolacja",
-    torta: "Krojenie tortu", tortaDesc: "Słodki moment razem",
-    rsvpTitle: "RSVP", rsvpDesc: "Potwierdź swoją obecność", nome: "Imię i nazwisko", nomePlaceholder: "Wprowadź swoje imię",
-    email: "Email", emailPlaceholder: "email@example.com", partecipi: "Czy będziesz uczestniczyć?", si: "Tak, będę!", no: "Niestety nie będę mógł",
-    ospiti: "Liczba gości", allergie: "Alergie lub specjalne diety", allergiePlaceholder: "Np: wegetarianin, celiak, alergie...",
-    messaggio: "Wiadomość dla nowożeńców", messaggioPlaceholder: "Napisz myśl...", invia: "Wyślij potwierdzenie", grazie: "Dziękujemy! Wkrótce otrzymasz wiadomość potwierdzającą.",
-    portamiLi: "Zabierz mnie tam", fotoTitle: "Udostępnij zdjęcia", fotoDesc: "Uchwyć magiczne momenty", fotoText: "Zeskanuj kod QR, aby przesłać swoje zdjęcia bezpośrednio do naszego wspólnego chmury. Każdy moment się liczy!",
-    scansiona: "Zeskanuj, aby przesłać",
-    guestbookTitle: "Księga gości", guestbookDesc: "Zostaw myśl", tuoNome: "Twoje imię", tuoNomePlaceholder: "Twoje imię",
-    scriviMessaggio: "Napisz swoją wiadomość do nowożeńców...", lasciaMessaggio: "Zostaw swoją wiadomość", primo: "Bądź pierwszy, który zostawi wiadomość!",
-    dressCode: "Dress Code", comeVestirsi: "Jak się ubrać", elegante: "Elegancki formalny", abito: "Długa sukienka lub midi dla pań, ciemny garnitur dla panów",
-    colori: "Zalecane kolory", tonalita: "Pastelowe odcienie, szałwia zielona, beż, róż cipria. Unikaj bieli (zarezerwowanej dla panny młodej)",
-    alloggio: "Zakwaterowanie", doveSoggiornare: "Gdzie się zatrzymać", strutture: "Struktury partnerskie będą dostępne wkrótce",
-    cosaAspettarsi: "Czego się spodziewać", matrimonio: "Włosko-polskie wesele", paneSale: "Chleb i sól", paneDesc: "Polska tradycja powitania nowożeńców chlebem (prosperity) i solą (ochrona przed trudnościami)",
-    tradizioniPolacche: "POLSKIE TRADYCJE", pranzoItaliano: "Włoski obiad", pranzoItalianoDesc: "Przygotujcie się na ucztę z przystawkami, pierwszymi, drugimi i deserami. Włoski posiłek to długie i towarzyskie doświadczenie!",
-    tradizioniItaliane: "WŁOSKIE TRADYCJE", vodka: "Wódka", vodkaDesc: "Polska tradycja toastu: 'Na zdrowie!' (Na zdrowie!) - przygotujcie się na świętowanie z klasycznymi polskimi shotami",
+    heroSubtitle: "Ślub", heroDate: "26 września 2026", heroTime: "Godzina 11:00",
+    labelDays: "dni", labelHours: "godziny", labelMinutes: "minuty", labelSeconds: "sekundy", saveDate: "Zapisz datę",
+    confirmTitle: "Potwierdź obecność",
+    // Aggiungi qui altre traduzioni se necessario
   }
 };
-
-function safeSetText(selector, text) {
-  const el = document.querySelector(selector);
-  if (el) el.textContent = text;
-}
-
-function safeSetPlaceholder(selector, text) {
-  const el = document.querySelector(selector);
-  if (el) el.placeholder = text;
-}
 
 function setLanguage(lang) {
   const t = translations[lang];
   if (!t) return;
 
-  try {
-    // Navigazione
-    safeSetText('a[href="#home"]', t.home);
-    safeSetText('a[href="#location"]', t.location);
-    safeSetText('a[href="#programma"]', t.programma);
-    safeSetText('a[href="#rsvp"]', t.rsvp);
-    safeSetText('a[href="#foto"]', t.foto);
-    safeSetText('a[href="#guestbook"]', t.guestbook);
+  // Navigazione
+  document.querySelector('a[href="#home"]').textContent = t.home;
+  document.querySelector('a[href="#location"]').textContent = t.location;
+  document.querySelector('a[href="#programma"]').textContent = t.programma;
+  document.querySelector('a[href="#rsvp"]').textContent = t.rsvp;
+  document.querySelector('a[href="#foto"]').textContent = t.foto;
+  document.querySelector('a[href="#guestbook"]').textContent = t.guestbook;
 
-    // Hero e Countdown
-    safeSetText('.hero-subtitle', t.heroSubtitle);
-    safeSetText('.hero-title', t.heroTitle);
-    safeSetText('.hero-date span:first-child', t.heroDate);
-    safeSetText('.hero-date span:last-child', t.heroTime);
-    safeSetText('.hero-button', t.saveDate);
-    safeSetText('#label-days', t.days);
-    safeSetText('#label-hours', t.hours);
-    safeSetText('#label-minutes', t.minutes);
-    safeSetText('#label-seconds', t.seconds);
+  // Hero
+  document.querySelector('.hero-subtitle').textContent = t.heroSubtitle;
+  document.querySelector('.hero-date span:first-child').textContent = t.heroDate;
+  document.querySelector('.hero-date span:last-child').textContent = t.heroTime;
+  document.querySelector('.hero-button').textContent = t.saveDate;
 
-    // Location
-    safeSetText('#location .section-intro h2', t.locationTitle);
-    safeSetText('#location .section-intro p', t.locationDesc);
-    safeSetText('#location .button', t.portamiLi);
+  // Countdown Labels (ID nel file index.html aggiornato)
+  document.getElementById('label-days').textContent = t.labelDays;
+  document.getElementById('label-hours').textContent = t.labelHours;
+  document.getElementById('label-minutes').textContent = t.labelMinutes;
+  document.getElementById('label-seconds').textContent = t.labelSeconds;
 
-    // Programma
-    safeSetText('#programma .section-intro h2', t.programmaTitle);
-    safeSetText('#programma .section-intro p', t.programmaDesc);
-    safeSetText('#programma .timeline-event:nth-child(1) h3', t.cerimonia);
-    safeSetText('#programma .timeline-event:nth-child(1) p', t.cerimoniaDesc);
-    safeSetText('#programma .timeline-event:nth-child(2) h3', t.aperitivo);
-    safeSetText('#programma .timeline-event:nth-child(2) p', t.aperitivoDesc);
-    safeSetText('#programma .timeline-event:nth-child(3) h3', t.pranzo);
-    safeSetText('#programma .timeline-event:nth-child(3) p', t.pranzoDesc);
-    safeSetText('#programma .timeline-event:nth-child(4) h3', t.torta);
-    safeSetText('#programma .timeline-event:nth-child(4) p', t.tortaDesc);
+  // RSVP Title
+  document.querySelector('#rsvp .section-intro p').textContent = t.confirmTitle;
 
-    // RSVP
-    safeSetText('#rsvp .section-intro h2', t.rsvpTitle);
-    safeSetText('#rsvp .section-intro p', t.rsvpDesc);
-    safeSetText('#rsvpForm .field-row:first-of-type label:first-of-type span', t.nome);
-    safeSetPlaceholder('#rsvpForm input[name="name"]', t.nomePlaceholder);
-    safeSetText('#rsvpForm .field-row:first-of-type label:nth-of-type(2) span', t.email);
-    safeSetPlaceholder('#rsvpForm input[name="email"]', t.emailPlaceholder);
-    safeSetText('#rsvpForm .radio-row span', t.partecipi);
-    safeSetText('#rsvpForm .radio-row label:first-of-type span', t.si);
-    safeSetText('#rsvpForm .radio-row label:nth-of-type(2) span', t.no);
-    safeSetText('#rsvpForm > label:nth-child(3) span', t.ospiti);
-    safeSetText('#rsvpForm > label:nth-child(4) span', t.allergie);
-    safeSetPlaceholder('#rsvpForm input[name="diet"]', t.allergiePlaceholder);
-    safeSetText('#rsvpForm > label:nth-child(5) span', t.messaggio);
-    safeSetPlaceholder('#rsvpForm textarea[name="message"]', t.messaggioPlaceholder);
-    safeSetText('#rsvpForm button[type="submit"]', t.invia);
-    safeSetText('#rsvpForm .form-note', t.grazie);
-
-    // Foto
-    safeSetText('#foto .section-intro h2', t.fotoTitle);
-    safeSetText('#foto .section-intro p', t.fotoDesc);
-    safeSetText('#foto .foto-card p', t.fotoText);
-    safeSetText('#foto .caption', t.scansiona);
-
-    // Guestbook
-    safeSetText('#guestbook .section-intro h2', t.guestbookTitle);
-    safeSetText('#guestbook .section-intro p', t.guestbookDesc);
-    safeSetText('#guestbookForm label:first-child span', t.tuoNome);
-    safeSetPlaceholder('#guestbookForm input[name="guestName"]', t.tuoNomePlaceholder);
-    safeSetText('#guestbookForm label:nth-child(2) span', t.scriviMessaggio);
-    safeSetPlaceholder('#guestbookForm textarea[name="guestMessage"]', t.scriviMessaggio);
-    safeSetText('#guestbookForm button[type="submit"]', t.lasciaMessaggio);
-    safeSetText('.guestbook-note p', t.primo);
-
-    // Info
-    safeSetText('.info-card:nth-child(1) h3', t.dressCode);
-    safeSetText('.info-card:nth-child(1) p:nth-child(3)', t.comeVestirsi);
-    safeSetText('.info-card:nth-child(1) strong:nth-child(4)', t.elegante);
-    safeSetText('.info-card:nth-child(1) p:nth-child(5)', t.abito);
-    safeSetText('.info-card:nth-child(1) strong:nth-child(6)', t.colori);
-    safeSetText('.info-card:nth-child(1) p:nth-child(7)', t.tonalita);
-    safeSetText('.info-card:nth-child(2) h3', t.alloggio);
-    safeSetText('.info-card:nth-child(2) p:nth-child(3)', t.doveSoggiornare);
-    safeSetText('.alloggio-note p', t.strutture);
-
-    // Finale
-    safeSetText('.section-finale .section-intro h2', t.cosaAspettarsi);
-    safeSetText('.section-finale .section-intro p', t.matrimonio);
-    safeSetText('.final-card:nth-child(1) h3', t.paneSale);
-    safeSetText('.final-card:nth-child(1) p', t.paneDesc);
-    safeSetText('.final-card:nth-child(1) span', t.tradizioniPolacche);
-    safeSetText('.final-card:nth-child(2) h3', t.pranzoItaliano);
-    safeSetText('.final-card:nth-child(2) p', t.pranzoItalianoDesc);
-    safeSetText('.final-card:nth-child(2) span', t.tradizioniItaliane);
-    safeSetText('.final-card:nth-child(3) h3', t.vodka);
-    safeSetText('.final-card:nth-child(3) p', t.vodkaDesc);
-    safeSetText('.final-card:nth-child(3) span', t.tradizioniPolacche);
-  } catch (error) {
-    console.error("Errore durante la traduzione", error);
-  }
-
-  // Aggiorna active button
-  document.querySelectorAll('.lang-switcher button').forEach(btn => btn.classList.remove('active'));
-  const firstBtn = document.querySelector('.lang-switcher button:first-child');
-  const lastBtn = document.querySelector('.lang-switcher button:last-child');
-  
-  if (lang === 'it' && firstBtn) firstBtn.classList.add('active');
-  if (lang === 'pl' && lastBtn) lastBtn.classList.add('active');
+  // Aggiorna bottoni lingua
+  document.querySelectorAll('.lang-switcher button').forEach(b => b.classList.remove('active'));
+  if (lang === 'it') document.querySelector('.lang-switcher button:first-child').classList.add('active');
+  else document.querySelector('.lang-switcher button:last-child').classList.add('active');
 }
 
-// Inizializza pulsanti lingua
-const btnIt = document.querySelector('.lang-switcher button:first-child');
-const btnPl = document.querySelector('.lang-switcher button:last-child');
-if (btnIt) btnIt.addEventListener('click', () => setLanguage('it'));
-if (btnPl) btnPl.addEventListener('click', () => setLanguage('pl'));
+// Inizializza pulsanti lingua con try/catch di sicurezza
+try {
+    document.querySelector('.lang-switcher button:first-child').addEventListener('click', () => setLanguage('it'));
+    document.querySelector('.lang-switcher button:last-child').addEventListener('click', () => setLanguage('pl'));
+} catch (e) {
+    console.warn("Pulsanti lingua non trovati o non inizializzati.");
+}
 
-// Avvia italiano di default
+// Avviamo in italiano di default
 setLanguage('it');
