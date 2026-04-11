@@ -1,6 +1,7 @@
 :root {
   --bg: #f7f4ee;
   --surface: rgba(255, 255, 255, 0.95);
+  --surface-strong: #ffffff;
   --text: #2f3a34;
   --muted: #6a6f65;
   --accent: #7a8f7f;
@@ -13,92 +14,142 @@
 html { scroll-behavior: smooth; }
 body { margin: 0; font-family: "Inter", sans-serif; color: var(--text); background: var(--bg); overflow-x: hidden; }
 
-/* INTRO ENVELOPE */
+/* --- INTRO BUSTA --- */
 .envelope-intro {
-  position: fixed; inset: 0; z-index: 1000;
-  display: flex; align-items: center; justify-content: center;
-  background: white; transition: all 0.8s ease;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
 }
-.envelope-intro.closing { opacity: 0; visibility: hidden; pointer-events: none; }
+
+.envelope-intro.closing {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
 
 .envelope-container {
-  position: relative; width: min(340px, 90vw); height: 240px; cursor: pointer; z-index: 10;
+  position: relative;
+  width: min(340px, 90vw);
+  height: 240px;
+  cursor: pointer;
 }
+
 .envelope-body {
-  position: absolute; inset: 0; background: var(--accent); border-radius: 2px;
-  box-shadow: 0 50px 100px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #8a9a8f 0%, #7a8f7f 100%);
+  border-radius: 4px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+  z-index: 10; /* La base della busta */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 .envelope-flap {
-  position: absolute; top: 0; left: 0; right: 0; height: 50%;
-  background: var(--accent-dark); clip-path: polygon(0 0, 100% 0, 50% 65%);
-  transform-origin: top; transition: all 0.7s ease; z-index: 2;
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 50%;
+  background: #7a8f7f;
+  clip-path: polygon(0 0, 100% 0, 50% 65%);
+  transform-origin: top;
+  transition: transform 0.7s ease, z-index 0.7s;
+  z-index: 15; /* Sopra la lettera all'inizio */
 }
-.open .envelope-flap { transform: rotateX(180deg); opacity: 0; }
+
+.envelope-intro.open .envelope-flap {
+  transform: rotateX(180deg);
+  z-index: 5; /* Una volta aperta va dietro la lettera */
+}
 
 .seal {
-  width: 80px; height: 80px; background: white; border-radius: 50%;
+  position: absolute;
+  width: 80px; height: 80px;
+  background: white;
+  border-radius: 50%;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
   display: flex; align-items: center; justify-content: center;
-  font-family: "Alex Brush", cursive; font-size: 1.5rem; color: var(--accent-dark);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1); z-index: 3;
+  font-family: "Alex Brush", cursive;
+  font-size: 1.5rem; color: var(--accent-dark);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  z-index: 20; /* Sempre sopra tutto finché non scompare */
+  transition: opacity 0.5s;
 }
 
+.envelope-intro.open .seal { opacity: 0; pointer-events: none; }
+
+/* --- LA LETTERA (Il Biglietto) --- */
 .letter {
-  position: absolute; width: min(300px, 85vw); background: white; padding: 2rem;
-  text-align: center; opacity: 0; transform: translateY(50px); transition: all 0.7s ease 0.3s;
+  position: absolute;
+  width: min(300px, 85vw);
+  background: white;
+  padding: 2.5rem 1.5rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  text-align: center;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) scale(0.8); /* Nascosta dentro */
+  opacity: 0;
+  z-index: 12; /* Tra la base della busta e il lembo chiuso */
+  transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.letter.visible { opacity: 1; transform: translateY(0); }
 
-/* SITE SHELL - LA TUA HOME */
-.site-shell {
-  opacity: 0; visibility: hidden; transition: opacity 1s ease;
+.letter.visible {
+  opacity: 1;
+  transform: translate(-50%, -85%) scale(1); /* Esce fuori sopra la busta */
+  z-index: 30; /* Diventa il livello più alto */
 }
+
+.letter-line { font-family: "Alex Brush", cursive; font-size: 2rem; color: var(--accent-dark); margin: 0; }
+.letter-date { font-size: 0.9rem; color: var(--muted); letter-spacing: 2px; margin-top: 10px; }
+
+/* --- HOME E CONTENUTI --- */
+.site-shell { opacity: 0; visibility: hidden; transition: opacity 1s ease; }
 .site-shell.visible { opacity: 1; visibility: visible; }
 
-/* HEADER E NAV */
 .site-header {
   position: fixed; top: 0; width: 100%; padding: 1rem 2rem;
   display: flex; justify-content: space-between; align-items: center;
   z-index: 50; background: rgba(247, 244, 238, 0.8); backdrop-filter: blur(10px);
 }
-.brand { font-family: "Alex Brush", cursive; font-size: 1.8rem; }
-.main-nav { display: flex; gap: 2rem; }
 
-/* HERO SECTION */
 .hero-section {
   min-height: 100vh; display: flex; align-items: center; justify-content: center;
   position: relative; text-align: center; padding: 20px;
 }
+
 .hero-bg {
   position: absolute; inset: 0; background: url("sfondo home.png") center/cover;
   opacity: 0.4; z-index: -1;
 }
-.hero-title {
-  font-family: "Alex Brush", cursive; font-size: clamp(3rem, 10vw, 6rem);
-  color: var(--accent-dark); margin: 0;
-}
-.countdown { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
-.countdown span { background: white; padding: 10px; border-radius: 8px; min-width: 70px; box-shadow: var(--shadow); }
-.countdown strong { display: block; font-size: 2rem; color: var(--accent-dark); }
 
-/* GRIGLIE E RESPONSIVE */
+.hero-title { font-family: "Alex Brush", cursive; font-size: clamp(3rem, 10vw, 6rem); color: var(--accent-dark); }
+
+.countdown { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
+.countdown span { background: white; padding: 15px; border-radius: 8px; min-width: 80px; box-shadow: var(--shadow); }
+.countdown strong { display: block; font-size: 2rem; color: var(--accent-dark); }
+.countdown small { font-size: 0.7rem; text-transform: uppercase; color: var(--muted); }
+
+/* --- GRID RESPONSIVE --- */
 .section { padding: 5rem 1.5rem; max-width: 1200px; margin: 0 auto; }
-.location-grid, .final-grid, .guestbook-grid, .field-row {
-  display: grid; grid-template-columns: 1fr; gap: 2rem;
-}
+.location-grid, .final-grid, .guestbook-grid, .field-row { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+
 @media (min-width: 768px) {
   .location-grid { grid-template-columns: 1.5fr 1fr; }
   .final-grid { grid-template-columns: repeat(3, 1fr); }
   .guestbook-grid { grid-template-columns: 1fr 1.2fr; }
   .field-row { grid-template-columns: 1fr 1fr; }
-  .main-nav { display: flex; }
-}
-@media (max-width: 767px) {
-  .main-nav { display: none; } /* Nasconde menu su mobile per pulizia */
 }
 
-/* CARDS */
-.event-card, .rsvp-form, .guestbook-form, .info-card {
-  background: white; padding: 2rem; border-radius: 8px; box-shadow: var(--shadow);
+@media (max-width: 767px) {
+  .main-nav { display: none; }
+  .hero-title { font-size: 3.5rem; }
 }
-img { max-width: 100%; height: auto; border-radius: 4px; }
-iframe { width: 100%; border-radius: 4px; }
+
+.event-card, .rsvp-form, .guestbook-form { background: white; padding: 2rem; border-radius: 8px; box-shadow: var(--shadow); }
+img, iframe { max-width: 100%; border-radius: 4px; border: none; }
