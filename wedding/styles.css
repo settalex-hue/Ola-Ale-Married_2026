@@ -164,7 +164,7 @@ textarea {
   color: var(--muted);
   font-weight: 500;
   gap: 20px;
-  padding-bottom: 10vw;
+  padding-bottom: 5vw;
 }
 
 .home-date span {
@@ -180,6 +180,7 @@ textarea {
   margin: 2rem 0 2rem;
   color: var(--gold);
   font-weight: 600;
+  padding-bottom: 5vw;
 }
 
 .countdown strong {
