@@ -173,7 +173,7 @@ const translations = {
   },
   pl: {
     home: "Dom", location: "Lokalizacja", programma: "Program", rsvp: "RSVP", foto: "Zdjęcia", guestbook: "Księga gości",
-    homeSubtitle: "Ślub", homeTitle: "Aleksandra & Alessandro", homeDate: "26 września 2026", homeTime: "Godzina 11:00",
+    homeSubtitle: "Ślub", homeTitle: "Aleksandra & Alessandro", homeDate: "26 Września 2026", homeTime: "Godzina 11:00",
     days: "dni", hours: "godziny", minutes: "minuty", seconds: "sekundy", saveDate: "Zapisz datę",
     locationTitle: "Lokalizacja", locationDesc: "Gdzie będziemy świętować naszą miłość",
     programmaTitle: "Program", programmaDesc: "Najpiękniejszy dzień", cerimonia: "Ceremonia", cerimoniaDesc: "Wymiana przysiąg",
@@ -221,7 +221,7 @@ function setLanguage(lang) {
     safeSetText('.home-subtitle', t.homeSubtitle);
     safeSetText('.home-title', t.homeTitle);
     safeSetText('.home-date span:first-child', t.homeDate);
-    safeSetText('.home-date span:last-child', t.homeTime);
+    safeSetText('.home-date span:nth-child(2)', t.homeTime);
     safeSetText('.home-button', t.saveDate);
     safeSetText('#label-days', t.days);
     safeSetText('#label-hours', t.hours);
