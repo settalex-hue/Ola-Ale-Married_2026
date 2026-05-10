@@ -47,135 +47,72 @@ body {
   transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
 }
 
-.envelope-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .envelope-container {
   position: relative;
-  width: 340px;
-  height: 240px;
-  cursor: pointer;
-  z-index: 10;
-  transform-style: preserve-3d;
-  transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  width: 324px;
+  height: 245px;
 }
 
-.envelope-intro.open .envelope-flap {
-  transform: rotateX(120deg) translateY(-20px);
-  opacity: 0;
-}
-
-.envelope-intro.open .envelope-seal-band {
-  transform: translateY(-280px);
-  opacity: 0;
-}
-
-.envelope-body {
+.envelope-rear {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, #8a9a8f 0%, #7a8f7f 100%);
-  border-radius: 2px;
-  box-shadow:
-    0 50px 100px rgba(81, 84, 75, 0.25),
-    inset -1px -1px 2px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  overflow: visible;
-}
-
-.envelope-flap {
-  position: absolute;
+  left: 0;
   top: 0;
-  left: 0;
-  right: 0;
-  height: 50%;
-  background: linear-gradient(135deg, #7a8f7f 0%, #6a7f6f 100%);
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 65%, 0 100%);
-  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.2);
-  transform-origin: top center;
-  transition: all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+  width: 324px;
+  height: 245px;
+  background: url("busta2.png") no-repeat center;
+  background-size: contain;
 }
 
-.envelope-intro.open .envelope-flap {
-  transform: rotateX(120deg) translateY(-20px);
-  opacity: 0;
-}
-
-.envelope-seal-band {
+.envelope-front {
   position: absolute;
-  top: 50%;
   left: 0;
-  right: 0;
-  height: 70px;
-  transform: translateY(-50%);
-  background: linear-gradient(90deg, #c0b5a5 0%, #d4c5b0 50%, #c0b5a5 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s;
-  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.5);
+  top: 0;
+  width: 324px;
+  height: 245px;
+  background: url("busta1.png") no-repeat center;
+  background-size: contain;
 }
 
-.envelope-intro.open .envelope-seal-band {
-  transform: translateY(-280px);
-  opacity: 0;
+.envelope-seal-closed {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 324px;
+  height: 185px;
+  background: url("busta3.png") no-repeat center;
+  background-size: contain;
+  transform: scaleY(1);
+  transform-origin: top;
+  transition: transform ease-in 1s;
 }
 
-.seal-line {
-  flex: 1;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.4);
-  max-width: 60px;
+.envelope-seal-closed.opening {
+  transform: scaleY(0);
 }
 
-.seal {
-  width: 85px;
-  height: 85px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%,
-      #fefefe 0%,
-      #f9f9f9 50%,
-      #efefef 100%);
-  box-shadow:
-    0 12px 24px rgba(0, 0, 0, 0.15),
-    inset 0 -4px 8px rgba(0, 0, 0, 0.08),
-    inset 0 2px 4px rgba(255, 255, 255, 0.9),
-    0 0 0 2px rgba(122, 143, 127, 0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: "Alex Brush", cursive;
-  font-size: 1.8rem;
-  color: #8a9a8f;
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  cursor: pointer;
-  flex-shrink: 0;
+.envelope-seal-opened {
+  position: absolute;
+  left: 0;
+  top: -185px;
+  width: 324px;
+  height: 185px;
+  background: url("busta4.png") no-repeat center;
+  background-size: contain;
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform ease-out 1s;
 }
 
-.seal:hover {
-  transform: scale(1.08) translateZ(10px);
+.envelope-seal-opened.opening {
+  transform: scaleY(1);
 }
 
-.seal-text {
-  display: block;
-  font-weight: 400;
-  letter-spacing: 0.05em;
-}
-
-/* Carta che emerge */
 .letter {
   position: absolute;
-  width: 280px;
-  min-height: 200px;
+  width: 314px;
+  height: 235px;
+  top: 5px;
+  left: 5px;
   background: #FFFFFF;
   border-radius: 2px;
   padding: 2.5rem 1.5rem;
@@ -185,31 +122,23 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  z-index: 20;
-  transform: translateY(140px) scale(0.85);
   opacity: 0;
-  transition: transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s, opacity 0.7s ease 0.3s;
+  transition: transform 1s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .letter.visible {
   opacity: 1;
-  transform: translateY(0) scale(1);
-  z-index: 20;
+}
+
+.letter.exiting {
+  transform: translateY(-140px);
 }
 
 .letter-rings {
-  position: absolute;
-  bottom: 0.8rem;
-  right: 0.8rem;
-  width: 3.6rem;
-  height: auto;
-  pointer-events: none;
-  display: block;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
-  border-radius: 0.8rem;
-  object-fit: contain;
-  opacity: 0.9;
-  background: #FFFFFF;
+  width: 90px;
+  height: 48px;
+  background: url("fedi.png") no-repeat center;
+  background-size: contain;
 }
 
 .letter-line {

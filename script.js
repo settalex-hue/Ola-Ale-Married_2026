@@ -1,8 +1,7 @@
 // ==========================================
 // VARIABILI GLOBALI
 // ==========================================
-const envelopeIntro = document.getElementById("envelopeIntro");
-const sealButton = document.getElementById("sealButton");
+const envelope = document.getElementById("envelope");
 let introAnimated = false;
 
 // ==========================================
@@ -12,25 +11,25 @@ function openEnvelope() {
   if (introAnimated) return;
   introAnimated = true;
 
-  if (envelopeIntro) envelopeIntro.classList.add("open");
-  if (sealButton) sealButton.style.pointerEvents = "none";
+  const sealClosed = envelope.querySelector(".envelope-seal-closed");
+  const letter = envelope.querySelector(".letter");
+  sealClosed.classList.add("opening");
+  letter.classList.add("visible");
 
   setTimeout(() => {
-    const letter = document.querySelector(".letter");
-    if (letter) letter.classList.add("visible");
-  }, 1000);
+    const sealOpened = envelope.querySelector(".envelope-seal-opened");
+    sealOpened.classList.add("opening");
 
-  setTimeout(() => {
-    if (envelopeIntro) {
-      envelopeIntro.classList.add("closing");
+    setTimeout(() => {
+      letter.classList.add("exiting");
       setTimeout(() => {
-        envelopeIntro.style.display = "none";
-      }, 800);
-    }
-    window.location.assign('./wedding');
-  }, 4500);
+        window.location.assign('./wedding');
+      }, 1000);
+    }, 1000);
+
+  }, 1000);
 }
 
-if (sealButton) {
-  sealButton.addEventListener("click", openEnvelope);
+if (envelope) {
+  envelope.addEventListener("click", openEnvelope);
 }
