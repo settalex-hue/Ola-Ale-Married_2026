@@ -240,6 +240,11 @@ textarea {
   gap: 2rem;
 }
 
+.info-flex {
+  display: flex;
+  justify-content: center;
+}
+
 .location-grid {
   grid-template-columns: 1.4fr 1fr;
   align-items: start;
