@@ -498,7 +498,7 @@ textarea {
   font-style: italic;
 }
 
-.card-iban {
+.card-iban-box {
   display: flex;
   justify-content: center;
 }
