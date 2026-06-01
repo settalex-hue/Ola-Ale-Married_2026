@@ -203,6 +203,7 @@ function safeSetPlaceholder(selector, text) {
 }
 
 function setLanguage(lang) {
+  return; // Questa riga va tolta per riattivare il traduttore
   const t = translations[lang];
   if (!t) return;
 
@@ -280,7 +281,7 @@ function setLanguage(lang) {
     // Info
     safeSetText('.info-card:nth-child(1) h3', t.alloggio);
     safeSetText('.info-card:nth-child(1) p:nth-child(3)', t.doveSoggiornare);
-    
+
     // Finale
     safeSetText('.section-finale .section-intro h2', t.cosaAspettarsi);
     safeSetText('.section-finale .section-intro p', t.matrimonio);
