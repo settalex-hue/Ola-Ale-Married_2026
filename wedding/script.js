@@ -164,7 +164,7 @@ const translations = {
     messaggio: "Un messaggio per gli sposi", messaggioPlaceholder: "Scrivi un pensiero...", invia: "Invia conferma", grazie: "Grazie! Riceverai presto un messaggio di conferma.",
     portamiLi: "Portami lì", fotoTitle: "Condividi le Foto", fotoDesc: "Cattura i momenti magici", fotoText: "Scansiona il QR code per caricare le tue foto direttamente nel nostro cloud condiviso. Ogni momento conta!",
     scansiona: "Scansiona per caricare",
-    alloggio: "Alloggio", doveSoggiornare: "Dove soggiornare", strutture: "Le strutture convenzionate saranno disponibili a breve",
+    alloggio: "Alloggio", doveSoggiornare: "Dove soggiornare",
     cosaAspettarsi: "Cosa Aspettarsi", matrimonio: "Un matrimonio italo-polacco", paneSale: "Pane e Sale", paneDesc: "Tradizione polacca di benvenuto agli sposi con pane (prosperità) e sale (protezione dalle difficoltà)",
     tradizioniPolacche: "TRADIZIONI POLACCHE", pranzoItaliano: "Il pranzo italiano", pranzoItalianoDesc: "Preparatevi per un banchetto con antipasti, primi, secondi e dolci. Il pasto italiano è un'esperienza lunga e conviviale!",
     tradizioniItaliane: "TRADIZIONI ITALIANE", vodka: "Vodka", vodkaDesc: "Tradizione polacca del brindisi: 'Na zdrowie!' (Alla salute!) - preparatevi a festeggiare con i classici shot polacchi",
@@ -280,8 +280,7 @@ function setLanguage(lang) {
     // Info
     safeSetText('.info-card:nth-child(1) h3', t.alloggio);
     safeSetText('.info-card:nth-child(1) p:nth-child(3)', t.doveSoggiornare);
-    safeSetText('.alloggio-note p', t.strutture);
-
+    
     // Finale
     safeSetText('.section-finale .section-intro h2', t.cosaAspettarsi);
     safeSetText('.section-finale .section-intro p', t.matrimonio);
