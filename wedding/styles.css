@@ -490,6 +490,7 @@ textarea {
 
 .iban {
   font-family: "Inter", sans-serif;
+  font-style: italic;
 }
 
 .card-iban {
