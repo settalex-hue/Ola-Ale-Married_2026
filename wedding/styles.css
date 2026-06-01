@@ -488,6 +488,22 @@ textarea {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.iban {
+  font-family: "Inter", sans-serif;
+}
+
+.card-iban {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-iban {
+  background-color: var(--surface-strong);
+  padding: 25px 50px;
+  border-radius: 25px;
+}
+
 .info-card {
   display: grid;
   gap: 1.5rem;
