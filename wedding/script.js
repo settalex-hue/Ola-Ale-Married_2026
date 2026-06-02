@@ -147,7 +147,7 @@ navLinks.forEach((link) => {
 });
 
 // ==========================================
-/ TRADUZIONI CON SISTEMA ANTI-CRASH REALE
+// TRADUZIONI CON SISTEMA ANTI-CRASH REALE
 // ==========================================
 const translations = {
   it: {
@@ -198,7 +198,7 @@ const translations = {
     grazie: "Grazie di cuore ♡"
   },
   pl: {
-    // Navigazione
+    // Navigacja 
     navHome: "Dom", navCerimonia: "Ceremonia", navLocation: "Wesele", navAlloggio: "Nocleg", 
     navAlatri: "Alatri", navProgramma: "Program", navRsvp: "Potwierdzenie", navFoto: "Zdjęcia", navDati: "Dane",
     // Home
