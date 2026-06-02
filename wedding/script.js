@@ -147,102 +147,48 @@ navLinks.forEach((link) => {
 });
 
 // ==========================================
-// TRADUZIONI CON SISTEMA ANTI-CRASH REALE
+// TRADUZIONI CON SISTEMA ANTI-CRASH
 // ==========================================
 const translations = {
   it: {
-    // Navigazione
-    navHome: "Home", navCerimonia: "Cerimonia", navLocation: "Location", navAlloggio: "Alloggio", 
-    navAlatri: "Alatri", navProgramma: "Programma", navRsvp: "RSVP", navFoto: "Foto", navDati: "Dati",
-    // Home
-    homeSubtitle: "Il matrimonio di", homeDate: "26 Settembre 2026", homeTime: "Ore 11:30", saveDate: "Save the Date",
-    days: "giorni", hours: "ore", minutes: "minuti", seconds: "secondi",
-    // Cerimonia & Location
-    cerimoniaTitle: "Cerimonia", cerimoniaDesc: "Dove celebreremo il nostro amore", portamiLi: "Portami lì",
-    locationTitle: "Location", locationDesc: "Dove festeggeremo",
-    // Alloggio
-    alloggioTitle: "Alloggio",
-    alloggioText: "🏠 Per chi arriverà da fuori, abbiamo pensato ad alcune strutture convenzionate in zona, così da rendere l’organizzazione del soggiorno più semplice. Quando contattaterai la struttura, ricordati di indicare che parteciperai al nostro matrimonio: la convenzione sarà applicata, mentre la disponibilità delle camere resterà soggetta alle prenotazioni già ricevute. Ti consigliamo quindi di muoverti con un po’ di anticipo, così da scegliere con calma la soluzione più comoda.",
-    // Alatri
-    alatriTitle: "Alatri",
-    alatriText: "Alatri è la città che ci ha visto crescere e il luogo in cui le nostre strade si sono incrociate per caso, per poi intrecciarsi per sempre. Sorge nel cuore della Ciociaria, una regione storica del Lazio meridionale fatta di tradizioni, folklore, borghi e sapori che parlano di casa. Se arriverai con un po’ di anticipo, ti consigliamo di scoprirla con calma e di lasciarti un momento per una pinta di birra al Guinness, dove tutto ebbe inizio.",
-    alatriCuriosare: "Per idee ed itinerari, puoi curiosare qui:",
-    alatriLink: "Portale turismo Ciociaria",
-    // Programma
-    programmaTitle: "Programma", programmaDesc: "La giornata più bella",
-    progCerimonia: "Cerimonia", progCerimoniaDesc: "Scambio delle promesse",
-    progAperitivo: "Aperitivo", progAperitivoDesc: "Brindisi e stuzzichini",
-    progPranzo: "Pranzo di nozze", progPranzoDesc: "Banchetto nuziale",
-    progTorta: "Taglio della torta", progTortaDesc: "Dolce momento insieme",
-    // Cosa Aspettarsi
-    expectTitle: "Cosa Aspettarsi", expectSubtitle: "Un matrimonio italo-polacco",
-    serenataTitle: "Serenata Folkloristica",
-    serenataText: "Qualche sera prima del matrimonio daremo il via ai festeggiamenti con una serenata folkloristica, tra canti, musica e brindisi in compagnia. Non puoi mancare! Per i dettagli rivolgiti allo sposo… mi raccomando, è un segreto! 😉",
-    pranzoTitle: "Il pranzo italiano", pranzoText: "Preparati per un banchetto all'italiana, un'esperienza lunga e conviviale!",
-    vodkaTitle: "Vodka", vodkaText: "'Na zdrowie!' (Alla salute!) - partecipa al brindisi polacco a base di Vodka",
-    // RSVP
-    rsvpTitle: "Répondez S’il Vous Plaît", rsvpDesc: "Conferma la tua presenza",
-    nomeLabel: "Nome e Cognome", nomePlaceholder: "Inserisci il tuo nome",
-    emailLabel: "Email", emailPlaceholder: "email@example.com",
-    partecipiLabel: "Parteciperai?", si: "Sì, ci sarò!", no: "Purtroppo non potrò",
-    ospitiLabel: "Numero di ospiti", allergieLabel: "Allergie o diete speciali",
-    messaggioLabel: "Un messaggio per gli sposi", messaggioPlaceholder: "Scrivi un pensiero...", invia: "Invia conferma",
-    // Foto
-    fotoTitle: "Condividi le Foto", fotoDesc: "Cattura i momenti magici",
-    fotoText: "📷 Scansiona il QR code per caricare le foto direttamente nel nostro cloud condiviso. Ogni momento conta!",
+    home: "Home", location: "Location", programma: "Programma", rsvp: "RSVP", foto: "Foto",
+    homeSubtitle: "Il matrimonio di", homeTitle: "Aleksandra & Alessandro", homeDate: "26 Settembre 2026", homeTime: "Ore 11:00",
+    days: "giorni", hours: "ore", minutes: "minuti", seconds: "secondi", saveDate: "Save the Date",
+    locationTitle: "Location", locationDesc: "Dove celebreremo il nostro amore",
+    programmaTitle: "Programma", programmaDesc: "La giornata più bella", cerimonia: "Cerimonia", cerimoniaDesc: "Scambio delle promesse",
+    aperitivo: "Aperitivo", aperitivoDesc: "Brindisi e stuzzichini", pranzo: "Pranzo di nozze", pranzoDesc: "Banchetto nuziale",
+    torta: "Taglio della torta", tortaDesc: "Dolce momento insieme",
+    rsvpTitle: "RSVP", rsvpDesc: "Conferma la tua presenza", nome: "Nome e Cognome", nomePlaceholder: "Inserisci il tuo nome",
+    email: "Email", emailPlaceholder: "email@example.com", partecipi: "Parteciperai?", si: "Sì, ci sarò!", no: "Purtroppo non potrò",
+    ospiti: "Numero di ospiti", allergie: "Allergie o diete speciali", allergiePlaceholder: "Es: vegetariano, celiaco, allergie...",
+    messaggio: "Un messaggio per gli sposi", messaggioPlaceholder: "Scrivi un pensiero...", invia: "Invia conferma", grazie: "Grazie! Riceverai presto un messaggio di conferma.",
+    portamiLi: "Portami lì", fotoTitle: "Condividi le Foto", fotoDesc: "Cattura i momenti magici", fotoText: "Scansiona il QR code per caricare le tue foto direttamente nel nostro cloud condiviso. Ogni momento conta!",
     scansiona: "Scansiona per caricare",
-    // Dati
-    datiTitle: "Un pensiero per il nostro domani",
-    datiText: "Se ti va di contribuire al nostro viaggio, ai nostri sogni o semplicemente a una birra sulla spiaggia, qui troverai le coordinate.",
-    datiIntestato: "Intestato a: Alessandro Settanni",
-    grazie: "Grazie di cuore ♡"
+    alloggio: "Alloggio", doveSoggiornare: "Dove soggiornare",
+    cosaAspettarsi: "Cosa Aspettarsi", matrimonio: "Un matrimonio italo-polacco", paneSale: "Pane e Sale", paneDesc: "Tradizione polacca di benvenuto agli sposi con pane (prosperità) e sale (protezione dalle difficoltà)",
+    tradizioniPolacche: "TRADIZIONI POLACCHE", pranzoItaliano: "Il pranzo italiano", pranzoItalianoDesc: "Preparatevi per un banchetto con antipasti, primi, secondi e dolci. Il pasto italiano è un'esperienza lunga e conviviale!",
+    tradizioniItaliane: "TRADIZIONI ITALIANE", vodka: "Vodka", vodkaDesc: "Tradizione polacca del brindisi: 'Na zdrowie!' (Alla salute!) - preparatevi a festeggiare con i classici shot polacchi",
   },
   pl: {
-    // Navigacja 
-    navHome: "Dom", navCerimonia: "Ceremonia", navLocation: "Wesele", navAlloggio: "Nocleg", 
-    navAlatri: "Alatri", navProgramma: "Program", navRsvp: "Potwierdzenie", navFoto: "Zdjęcia", navDati: "Dane",
-    // Home
-    homeSubtitle: "Ślub", homeDate: "26 Września 2026", homeTime: "Godzina 11:30", saveDate: "Zapisz datę",
-    days: "dni", hours: "godziny", minutes: "minuty", seconds: "sekundy",
-    // Cerimonia & Location
-    cerimoniaTitle: "Ceremonia", cerimoniaDesc: "Cerimonia ślubna odbędzie się w", portamiLi: "Zabierz mnie tam",
-    locationTitle: "Wesele", locationDesc: "Przyjęcie weselne odbędzie się w",
-    // Alloggio
-    alloggioTitle: "Nocleg",
-    alloggioText: "🏠 Dla osób przybywających z daleka przygotowaliśmy kilka rekomendowanych obiektów w okolicy, aby ułatwić organizację pobytu. Kontaktując się z wybranym miejscem, pamiętaj o wspomnieniu, że jesteś gościem na naszym ślubie: zostanie naliczona zniżka, jednak dostępność pokoi zależy od wcześniejszych rezerwacji. Zalecamy więc rezerwację z wyprzedzeniem, aby spokojnie wybrać najwygodniejsze rozwiązanie.",
-    // Alatri
-    alatriTitle: "Alatri",
-    alatriText: "Alatri, to miasto w którym dorastaliśmy. Miejsce, gdzie nasze ścieżki skrzyżowały się przez przypadek, by połączyć się na zawsze. Znajduje się w sercu Ciociarii -historycznego regionu południowego Lacjum- pełnego tradycji, folkloru, urokliwych miasteczek i smaków, które kojarzą się z domem. Jeśli przyjedziesz trochę wcześniej, polecamy spokojnie odkryć miasto i zatrzymać się na kufelek piwa w pubie Guinness, gdzie wszystko się zaczęło.",
-    alatriCuriosare: "Pomysły i plany podróży znajdziesz tutaj:",
-    alatriLink: "Portal turystyczny Ciociaria",
-    // Programma
-    programmaTitle: "Program", programmaDesc: "Najpiękniejszy dzień",
-    progCerimonia: "Ceremonia", progCerimoniaDesc: "Wymiana przysiąg",
-    progAperitivo: "Aperitif", progAperitivoDesc: "Tosty i przekąski",
-    progPranzo: "Obiad weselny", progPranzoDesc: "Uroczysta kolacja",
-    progTorta: "Krojenie tortu", progTortaDesc: "Słodki moment razem",
-    // Cosa Aspettarsi
-    expectTitle: "Czego się spodziewać", expectSubtitle: "Włosko-polskie wesele",
-    serenataTitle: "Tradycyjna Serenada",
-    serenataText: "Kilka dni przed ślubem, oficjalnie rozpoczniemy uroczystości ślubne tradycyjną serenadą. Tańce, hulanki i swawole, nie może Cię zabraknąć! O szczegóły pytaj Pana Młodego… pamiętaj, to tajemnica! 😉",
-    pranzoTitle: "Włoski obiad", pranzoText: "Przygotuj się na włoską ucztę – długie, biesiadne i pełne smaków doświadczenie przy stole!",
-    vodkaTitle: "Wódka Weselna", vodkaText: "Na zdrowie!' - weź udział w tradycyjnym polskim toaście.",
-    // RSVP
-    rsvpTitle: "Potwierdzenie", rsvpDesc: "Potwierdź swoją obecność",
-    nomeLabel: "Imię i nazwisko", nomePlaceholder: "Wpisz swoje imię",
-    emailLabel: "Email", emailPlaceholder: "email@example.com",
-    partecipiLabel: "Czy weźmiesz udział?", si: "Tak, będę!", no: "Niestety nie mogę",
-    ospitiLabel: "Liczba gości", allergieLabel: "Alergie lub specjalne diety",
-    messaggioLabel: "Wiadomość dla nowożeńców", messaggioPlaceholder: "Napisz coś od siebie...", invia: "Wyślij potwierdzenie",
-    // Foto
-    fotoTitle: "Udostępnij zdjęcia", fotoDesc: "Uwiecznij magiczne chwile",
-    fotoText: "📷 Zeskanuj kod QR, aby przesłać zdjęcia bezpośrednio do naszej wspólnej chmury. Liczy się każdy moment!",
+    home: "Dom", location: "Lokalizacja", programma: "Program", rsvp: "RSVP", foto: "Zdjęcia", guestbook: "Księga gości",
+    homeSubtitle: "Ślub", homeTitle: "Aleksandra & Alessandro", homeDate: "26 Września 2026", homeTime: "Godzina 11:00",
+    days: "dni", hours: "godziny", minutes: "minuty", seconds: "sekundy", saveDate: "Zapisz datę",
+    locationTitle: "Lokalizacja", locationDesc: "Gdzie będziemy świętować naszą miłość",
+    programmaTitle: "Program", programmaDesc: "Najpiękniejszy dzień", cerimonia: "Ceremonia", cerimoniaDesc: "Wymiana przysiąg",
+    aperitivo: "Aperitif", aperitivoDesc: "Tosty i przekąski", pranzo: "Obiad weselny", pranzoDesc: "Uroczysta kolacja",
+    torta: "Krojenie tortu", tortaDesc: "Słodki moment razem",
+    rsvpTitle: "RSVP", rsvpDesc: "Potwierdź swoją obecność", nome: "Imię i nazwisko", nomePlaceholder: "Wprowadź swoje imię",
+    email: "Email", emailPlaceholder: "email@example.com", partecipi: "Czy będziesz uczestniczyć?", si: "Tak, będę!", no: "Niestety nie będę mógł",
+    ospiti: "Liczba gości", allergie: "Alergie lub specjalne diety", allergiePlaceholder: "Np: wegetarianin, celiak, alergie...",
+    messaggio: "Wiadomość dla nowożeńców", messaggioPlaceholder: "Napisz myśl...", invia: "Wyślij potwierdzenie", grazie: "Dziękujemy! Wkrótce otrzymasz wiadomość potwierdzającą.",
+    portamiLi: "Zabierz mnie tam", fotoTitle: "Udostępnij zdjęcia", fotoDesc: "Uchwyć magiczne momenty", fotoText: "Zeskanuj kod QR, aby przesłać swoje zdjęcia bezpośrednio do naszego wspólnego chmury. Każdy moment się liczy!",
     scansiona: "Zeskanuj, aby przesłać",
-    // Dati
-    datiTitle: "Ważne dla nas",
-    datiText: "Mamy wielką nadzieję, że będziesz towarzyszyć nam w tak ważnych dla nas chwilach.",
-    datiIntestato: "Jeśli chcesz dołożyć się do naszej podróży poślubnej, naszych marzeń lub po prostu postawić nam piwo na plaży:",
-    grazie: "Dziękujemy z całego serca ♡"
+    dressCode: "Dress Code", comeVestirsi: "Jak się ubrać", elegante: "Elegancki formalny", abito: "Długa sukienka lub midi dla pań, ciemny garnitur dla panów",
+    colori: "Zalecane kolory", tonalita: "Pastelowe odcienie, szałwia zielona, beż, róż cipria. Unikaj bieli (zarezerwowanej dla panny młodej)",
+    alloggio: "Zakwaterowanie", doveSoggiornare: "Gdzie się zatrzymać", strutture: "Struktury partnerskie będą dostępne wkrótce",
+    cosaAspettarsi: "Czego się spodziewać", matrimonio: "Włosko-polskie wesele", paneSale: "Chleb i sól", paneDesc: "Polska tradycja powitania nowożeńców chlebem (prosperity) i solą (ochrona przed trudnościami)",
+    tradizioniPolacche: "POLSKIE TRADYCJE", pranzoItaliano: "Włoski obiad", pranzoItalianoDesc: "Przygotujcie się na ucztę z przystawkami, pierwszymi, drugimi i deserami. Włoski posiłek to długie i towarzyskie doświadczenie!",
+    tradizioniItaliane: "WŁOSKIE TRADYCJE", vodka: "Wódka", vodkaDesc: "Polska tradycja toastu: 'Na zdrowie!' (Na zdrowie!) - przygotujcie się na świętowanie z klasycznymi polskimi shotami",
   }
 };
 
