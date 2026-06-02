@@ -158,10 +158,15 @@ textarea {
 }
 
 .home-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 1rem 0 0;
   font-family: "Alex Brush", cursive;
   font-size: clamp(2.5rem, 4vw, 5rem);
   color: var(--accent-dark);
+  line-height: 1;
+  gap: 1rem;
 }
 
 .home-date {
@@ -247,7 +252,7 @@ textarea {
 
 .location-grid {
   grid-template-columns: 1.4fr 1fr;
-  align-items: start;
+  align-items: end;
 }
 
 .map-card {
@@ -618,6 +623,17 @@ textarea {
 .toast.show {
   transform: translateX(-50%) translateY(0);
   opacity: 1;
+}
+
+p.justify {
+  text-align: justify;
+}
+
+@media(max-width: 640px) {
+  .home-title {
+    flex-direction: column;
+    gap: 0;
+  }
 }
 
 @media(max-width: 640px) {
