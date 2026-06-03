@@ -131,7 +131,7 @@ const translations = {
     alloggioTitle: "Alloggio",
     alloggioText: "Per chi arriverà da fuori, abbiamo pensato ad alcune strutture convenzionate in zona, così da rendere il soggiorno più semplice da pianificare. Quando contatterai la struttura, ricordati di indicare che parteciperai al nostro matrimonio: la convenzione sarà applicata, mentre la disponibilità delle camere resterà soggetta alle prenotazioni già ricevute. Ti consigliamo quindi di organizzarti con qualche giorno di anticipo, così da scegliere con calma la soluzione più comoda.",
     alatriTitle: "Alatri",
-    alatriText1: "Alatri è la città che ci ha visto crescere e il luogo in cui le nostre strade si sono incrociate per caso, per poi intrecciarsi per sempre. Sorge nel cuore della Ciociaria, -una regione storica del Lazio meridionale- fatta di: tradizioni, folklore, borghi e sapori che parlano di casa. Se arriverai con un po’ di anticipo, ti consigliamo di scoprirla con calma e di lasciarti un momento per una pinta di birra al Guinness, dove tutto ebbe inizio.",
+    alatriText1: "Alatri è la città che ci ha visto crescere e il luogo in cui le nostre strade si sono incrociate per caso, per poi intrecciarsi per sempre. Sorge nel cuore della Ciociaria — una regione storica del Lazio meridionale — fatta di tradizioni, folklore, borghi e sapori che parlano di casa. Se avrai modo di trattenerti qualche giorno, ti consigliamo di scoprirla con calma e di concederti una sosta per una pinta di birra al Guinness, dove tutto ebbe inizio.",
     alatriText2: "Per idee ed itinerari, puoi curiosare qui:",
     alatriLink: "Portale turismo Ciociaria",
     programmaTitle: "Programma", programmaDesc: "La giornata più bella",
@@ -154,7 +154,7 @@ const translations = {
     fotoText: "Scansiona il QR code per caricare le foto direttamente nel nostro cloud condiviso. Ogni momento conta!",
     scansiona: "Scansiona per caricare",
     datiTitle: "Un pensiero per il nostro domani",
-    datiText: "Se ti va di contribuire al nostro viaggio, ai nostri sogni o semplicemente a una birra sulla spiaggia, qui troverai le coordinate.",
+    datiText: "Se ti va di contribuire al nostro viaggio, ai nostri sogni o semplicemente ad una birra sulla spiaggia, qui troverai le coordinate.",
     datiIntestato: "Intestato a: Alessandro Settanni",
     grazie: "Grazie di cuore ♡"
   },
