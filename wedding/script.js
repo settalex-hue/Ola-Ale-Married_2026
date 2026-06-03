@@ -235,6 +235,12 @@ function setLanguage(lang) {
     safeSetText('#label-minutes', t.minutes);
     safeSetText('#label-seconds', t.seconds);
 
+    // NUOVA LOGICA: Gestione dinamica dei nomi degli sposi
+    document.querySelectorAll('.home-title div').forEach(div => {
+      const traduzione = div.getAttribute(`data-${lang}`);
+      if (traduzione) div.textContent = traduzione;
+    });
+
     // Cerimonia & Location
     safeSetText('#cerimonia .section-intro h2', t.cerimoniaTitle);
     safeSetText('#cerimonia .section-intro p', t.cerimoniaDesc);
