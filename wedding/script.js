@@ -340,16 +340,16 @@ function setLanguage(lang) {
     }
 
     // NUOVA LOGICA: Gestione icone IBAN e testo IBAN
-  const ibanText = document.getElementById('iban-text');
-  const polishIcons = document.getElementById('polish-icons');
+      const ibanCont = document.getElementById('iban-container');
+      const polishIcons = document.getElementById('polish-icons');
 
-  if (lang === 'pl') {
-    if (ibanText) ibanText.style.display = 'none'; // Nasconde l'IBAN
-    if (polishIcons) polishIcons.style.display = 'flex'; // Mostra le icone
-  } else {
-    if (ibanText) ibanText.style.display = 'block'; // Mostra l'IBAN
-    if (polishIcons) polishIcons.style.display = 'none'; // Nasconde le icone
-  }
+     if (lang === 'pl') {
+     if (ibanCont) ibanCont.style.display = 'none'; // Nasconde l'IBAN
+     if (polishIcons) polishIcons.style.display = 'flex'; // Mostra le icone
+     } else {
+     if (ibanCont) ibanCont.style.display = 'block'; // Mostra l'IBAN
+     if (polishIcons) polishIcons.style.display = 'none'; // Nasconde le icone
+     }
 
     document.querySelectorAll('.section-intro h2').forEach(h2 => {
       if (h2.textContent.includes("Grazie di cuore") || h2.textContent.includes("Dziękujemy")) {
