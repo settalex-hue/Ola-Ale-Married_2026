@@ -142,7 +142,7 @@ const translations = {
     expectTitle: "Cosa Aspettarsi", expectSubtitle: "Un matrimonio italo-polacco",
     serenataTitle: "Serenata Folkloristica",
     serenataText: "Qualche sera prima del matrimonio daremo il via ai festeggiamenti con una serenata folkloristica in abiti tipici della tradizione, tra canti, musica e momenti in compagnia. Non puoi mancare! Per i dettagli rivolgiti allo sposo… mi raccomando, è un segreto! 😉",
-    pranzoTitle: "Il pranzo italiano", pranzoText: "Preparati a un banchetto all’italiana: un momento conviviale, ricco di sapori e profumi, da condividere insieme a tavola!",
+    pranzoTitle: "Il pranzo italiano", pranzoText: "Preparati a un banchetto all’italiana: un momento conviviale, ricco di sapori e profumi da condividere insieme!",
     vodkaTitle: "Vodka", vodkaText: "'Na zdrowie!' - alla salute! Tieniti pronto per il brindisi polacco a base di vodka e a cantare 'Gorzka wódka!' ogni volta che vorrai invitare gli sposi a darsi un bacio.",
     rsvpTitle: "Répondez S’il Vous Plaît", rsvpDesc: "Conferma la tua presenza",
     nomeLabel: "Nome e Cognome", nomePlaceholder: "Inserisci il tuo nome",
