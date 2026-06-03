@@ -121,7 +121,7 @@ const translations = {
   it: {
     navHome: "Home", navCerimonia: "Cerimonia", navLocation: "Location", navAlloggio: "Alloggio", 
     navAlatri: "Alatri", navProgramma: "Programma", navRsvp: "RSVP", navFoto: "Foto", navDati: "Dati",
-    homeSubtitle: "Il matrimonio di", homeDate: "26 Settembre 2026", homeTime: "Ore 11:30", saveDate: "Save the Date",
+    homeSubtitle: "Il matrimonio di", homeDate: "26 Settembre 2026", homeTime: "Ore 11:00", saveDate: "Save the Date",
     days: "giorni", hours: "ore", minutes: "minuti", seconds: "secondi",
     cerimoniaTitle: "Cerimonia", cerimoniaDesc: "Dove celebreremo il nostro amore",
     locCerimoniaNome: "Cattedrale di S.Paolo - Civita",
@@ -161,7 +161,7 @@ const translations = {
   pl: {
     navHome: "Dom", navCerimonia: "Ceremonia", navLocation: "Wesele", navAlloggio: "Nocleg", 
     navAlatri: "Alatri", navProgramma: "Program", navRsvp: "Potwierdzenie", navFoto: "Zdjęcia", navDati: "Dane",
-    homeSubtitle: "Ślub", homeDate: "26 Września 2026", homeTime: "Godzina 11:30", saveDate: "Zapisz datę",
+    homeSubtitle: "Ślub", homeDate: "26 Września 2026", homeTime: "Godzina 11:00", saveDate: "Zapisz datę",
     days: "dni", hours: "godziny", minutes: "minuty", seconds: "sekundy",
     cerimoniaTitle: "Ceremonia", cerimoniaDesc: "Cerimonia ślubna odbędzie się w",
     locCerimoniaNome: "Katedra św. Pawła - Civita",
