@@ -14,7 +14,7 @@ try {
 // ==========================================
 const rsvpForm = document.getElementById("rsvpForm");
 const toast = document.getElementById("toast");
-const targetDate = new Date("2026-09-26T11:30:00").getTime();
+const targetDate = new Date("2026-09-26T11:00:00").getTime();
 
 function updateCountdown() {
   const dEl = document.getElementById("days");
