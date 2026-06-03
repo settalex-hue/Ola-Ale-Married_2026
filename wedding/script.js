@@ -131,7 +131,7 @@ const translations = {
     alloggioTitle: "Alloggio",
     alloggioText: "Per chi arriverà da fuori, abbiamo pensato ad alcune strutture convenzionate in zona, così da rendere l’organizzazione del soggiorno più semplice. Quando contattaterai la struttura, ricordati di indicare che parteciperai al nostro matrimonio: la convenzione sarà applicata, mentre la disponibilità delle camere resterà soggetta alle prenotazioni già ricevute. Ti consigliamo quindi di muoverti con un po’ di anticipo, così da scegliere con calma la soluzione più comoda.",
     alatriTitle: "Alatri",
-    alatriText1: "Alatri è la città che ci ha visto crescere e il luogo in cui le nostre strade si sono incrociate per caso, per poi intrecciarsi per sempre. Sorge nel cuore della Ciociaria, una regione storica del Lazio meridionale fatta di tradizioni, folklore, borghi e sapori che parlano di casa. Se arriverai con un po’ di anticipo, ti consigliamo di scoprirla con calma e di lasciarti un momento per una pinta di birra al Guinness, dove tutto ebbe inizio.",
+    alatriText1: "Alatri è la città che ci ha visto crescere e il luogo in cui le nostre strade si sono incrociate per caso, per poi intrecciarsi per sempre. Sorge nel cuore della Ciociaria, -una regione storica del Lazio meridionale- fatta di: tradizioni, folklore, borghi e sapori che parlano di casa. Se arriverai con un po’ di anticipo, ti consigliamo di scoprirla con calma e di lasciarti un momento per una pinta di birra al Guinness, dove tutto ebbe inizio.",
     alatriText2: "Per idee ed itinerari, puoi curiosare qui:",
     alatriLink: "Portale turismo Ciociaria",
     programmaTitle: "Programma", programmaDesc: "La giornata più bella",
