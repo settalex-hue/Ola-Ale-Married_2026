@@ -151,44 +151,78 @@ navLinks.forEach((link) => {
 // ==========================================
 const translations = {
   it: {
-    home: "Home", location: "Location", programma: "Programma", rsvp: "RSVP", foto: "Foto",
-    homeSubtitle: "Il matrimonio di", homeTitle: "Aleksandra & Alessandro", homeDate: "26 Settembre 2026", homeTime: "Ore 11:00",
-    days: "giorni", hours: "ore", minutes: "minuti", seconds: "secondi", saveDate: "Save the Date",
-    locationTitle: "Location", locationDesc: "Dove celebreremo il nostro amore",
-    programmaTitle: "Programma", programmaDesc: "La giornata più bella", cerimonia: "Cerimonia", cerimoniaDesc: "Scambio delle promesse",
-    aperitivo: "Aperitivo", aperitivoDesc: "Brindisi e stuzzichini", pranzo: "Pranzo di nozze", pranzoDesc: "Banchetto nuziale",
-    torta: "Taglio della torta", tortaDesc: "Dolce momento insieme",
-    rsvpTitle: "RSVP", rsvpDesc: "Conferma la tua presenza", nome: "Nome e Cognome", nomePlaceholder: "Inserisci il tuo nome",
-    email: "Email", emailPlaceholder: "email@example.com", partecipi: "Parteciperai?", si: "Sì, ci sarò!", no: "Purtroppo non potrò",
-    ospiti: "Numero di ospiti", allergie: "Allergie o diete speciali", allergiePlaceholder: "Es: vegetariano, celiaco, allergie...",
-    messaggio: "Un messaggio per gli sposi", messaggioPlaceholder: "Scrivi un pensiero...", invia: "Invia conferma", grazie: "Grazie! Riceverai presto un messaggio di conferma.",
-    portamiLi: "Portami lì", fotoTitle: "Condividi le Foto", fotoDesc: "Cattura i momenti magici", fotoText: "Scansiona il QR code per caricare le tue foto direttamente nel nostro cloud condiviso. Ogni momento conta!",
+    navHome: "Home", navCerimonia: "Cerimonia", navLocation: "Location", navAlloggio: "Alloggio", 
+    navAlatri: "Alatri", navProgramma: "Programma", navRsvp: "RSVP", navFoto: "Foto", navDati: "Dati",
+    homeSubtitle: "Il matrimonio di", homeDate: "26 Settembre 2026", homeTime: "Ore 11:30", saveDate: "Save the Date",
+    days: "giorni", hours: "ore", minutes: "minuti", seconds: "secondi",
+    cerimoniaTitle: "Cerimonia", cerimoniaDesc: "Dove celebreremo il nostro amore", portamiLi: "Portami lì",
+    locationTitle: "Location", locationDesc: "Dove festeggeremo",
+    alloggioTitle: "Alloggio",
+    alloggioText: "Per chi arriverà da fuori, abbiamo pensato ad alcune strutture convenzionate in zona, così da rendere l’organizzazione del soggiorno più semplice. Quando contattaterai la struttura, ricordati di indicare che parteciperai al nostro matrimonio: la convenzione sarà applicata, mentre la disponibilità delle camere resterà soggetta alle prenotazioni già ricevute. Ti consigliamo quindi di muoverti con un po’ di anticipo, così da scegliere con calma la soluzione più comoda.",
+    alatriTitle: "Alatri",
+    alatriText1: "Alatri è la città che ci ha visto crescere e il luogo in cui le nostre strade si sono incrociate per caso, per poi intrecciarsi per sempre. Sorge nel cuore della Ciociaria, una regione storica del Lazio meridionale fatta di tradizioni, folklore, borghi e sapori che parlano di casa. Se arriverai con un po’ di anticipo, ti consigliamo di scoprirla con calma e di lasciarti un momento per una pinta di birra al Guinness, dove tutto ebbe inizio.",
+    alatriText2: "Per idee ed itinerari, puoi curiosare qui:",
+    alatriLink: "Portale turismo Ciociaria",
+    programmaTitle: "Programma", programmaDesc: "La giornata più bella",
+    progCerimonia: "Cerimonia", progCerimoniaDesc: "Scambio delle promesse",
+    progAperitivo: "Aperitivo", progAperitivoDesc: "Brindisi e stuzzichini",
+    progPranzo: "Pranzo di nozze", progPranzoDesc: "Banchetto nuziale",
+    progTorta: "Taglio della torta", progTortaDesc: "Dolce momento insieme",
+    expectTitle: "Cosa Aspettarsi", expectSubtitle: "Un matrimonio italo-polacco",
+    serenataTitle: "Serenata Folkloristica",
+    serenataText: "Qualche sera prima del matrimonio daremo il via ai festeggiamenti con una serenata folkloristica, tra canti, musica e brindisi in compagnia. Non puoi mancare! Per i dettagli rivolgiti allo sposo… mi raccomando, è un segreto! 😉",
+    pranzoTitle: "Il pranzo italiano", pranzoText: "Preparati per un banchetto all'italiana, un'esperienza lunga e conviviale!",
+    vodkaTitle: "Vodka", vodkaText: "'Na zdrowie!' (Alla salute!) - partecipa al brindisi polacco a base di Vodka",
+    rsvpTitle: "Répondez S’il Vous Plaît", rsvpDesc: "Conferma la tua presenza",
+    nomeLabel: "Nome e Cognome", nomePlaceholder: "Inserisci il tuo nome",
+    emailLabel: "Email", emailPlaceholder: "email@example.com",
+    partecipiLabel: "Parteciperai?", si: "Sì, ci sarò!", no: "Purtroppo non potrò",
+    ospitiLabel: "Numero di ospiti", allergieLabel: "Allergie o diete speciali",
+    messaggioLabel: "Un messaggio per gli sposi", messaggioPlaceholder: "Scrivi un pensiero...", invia: "Invia conferma",
+    fotoTitle: "Condividi le Foto", fotoDesc: "Cattura i momenti magici",
+    fotoText: "Scansiona il QR code per caricare le foto direttamente nel nostro cloud condiviso. Ogni momento conta!",
     scansiona: "Scansiona per caricare",
-    alloggio: "Alloggio", doveSoggiornare: "Dove soggiornare",
-    cosaAspettarsi: "Cosa Aspettarsi", matrimonio: "Un matrimonio italo-polacco", paneSale: "Pane e Sale", paneDesc: "Tradizione polacca di benvenuto agli sposi con pane (prosperità) e sale (protezione dalle difficoltà)",
-    tradizioniPolacche: "TRADIZIONI POLACCHE", pranzoItaliano: "Il pranzo italiano", pranzoItalianoDesc: "Preparatevi per un banchetto con antipasti, primi, secondi e dolci. Il pasto italiano è un'esperienza lunga e conviviale!",
-    tradizioniItaliane: "TRADIZIONI ITALIANE", vodka: "Vodka", vodkaDesc: "Tradizione polacca del brindisi: 'Na zdrowie!' (Alla salute!) - preparatevi a festeggiare con i classici shot polacchi",
+    datiTitle: "Un pensiero per il nostro domani",
+    datiText: "Se ti va di contribuire al nostro viaggio, ai nostri sogni o semplicemente a una birra sulla spiaggia, qui troverai le coordinate.",
+    datiIntestato: "Intestato a: Alessandro Settanni",
+    grazie: "Grazie di cuore ♡"
   },
   pl: {
-    home: "Dom", location: "Lokalizacja", programma: "Program", rsvp: "RSVP", foto: "Zdjęcia", guestbook: "Księga gości",
-    homeSubtitle: "Ślub", homeTitle: "Aleksandra & Alessandro", homeDate: "26 Września 2026", homeTime: "Godzina 11:00",
-    days: "dni", hours: "godziny", minutes: "minuty", seconds: "sekundy", saveDate: "Zapisz datę",
-    locationTitle: "Lokalizacja", locationDesc: "Gdzie będziemy świętować naszą miłość",
-    programmaTitle: "Program", programmaDesc: "Najpiękniejszy dzień", cerimonia: "Ceremonia", cerimoniaDesc: "Wymiana przysiąg",
-    aperitivo: "Aperitif", aperitivoDesc: "Tosty i przekąski", pranzo: "Obiad weselny", pranzoDesc: "Uroczysta kolacja",
-    torta: "Krojenie tortu", tortaDesc: "Słodki moment razem",
-    rsvpTitle: "RSVP", rsvpDesc: "Potwierdź swoją obecność", nome: "Imię i nazwisko", nomePlaceholder: "Wprowadź swoje imię",
-    email: "Email", emailPlaceholder: "email@example.com", partecipi: "Czy będziesz uczestniczyć?", si: "Tak, będę!", no: "Niestety nie będę mógł",
-    ospiti: "Liczba gości", allergie: "Alergie lub specjalne diety", allergiePlaceholder: "Np: wegetarianin, celiak, alergie...",
-    messaggio: "Wiadomość dla nowożeńców", messaggioPlaceholder: "Napisz myśl...", invia: "Wyślij potwierdzenie", grazie: "Dziękujemy! Wkrótce otrzymasz wiadomość potwierdzającą.",
-    portamiLi: "Zabierz mnie tam", fotoTitle: "Udostępnij zdjęcia", fotoDesc: "Uchwyć magiczne momenty", fotoText: "Zeskanuj kod QR, aby przesłać swoje zdjęcia bezpośrednio do naszego wspólnego chmury. Każdy moment się liczy!",
+    navHome: "Dom", navCerimonia: "Ceremonia", navLocation: "Wesele", navAlloggio: "Nocleg", 
+    navAlatri: "Alatri", navProgramma: "Program", navRsvp: "Potwierdzenie", navFoto: "Zdjęcia", navDati: "Dane",
+    homeSubtitle: "Ślub", homeDate: "26 Września 2026", homeTime: "Godzina 11:30", saveDate: "Zapisz datę",
+    days: "dni", hours: "godziny", minutes: "minuty", seconds: "sekundy",
+    cerimoniaTitle: "Ceremonia", cerimoniaDesc: "Cerimonia ślubna odbędzie się w", portamiLi: "Zabierz mnie tam",
+    locationTitle: "Wesele", locationDesc: "Przyjęcie weselne odbędzie się w",
+    alloggioTitle: "Nocleg",
+    alloggioText: "Dla osób przybywających z daleka przygotowaliśmy kilka rekomendowanych obiektów w okolicy, aby ułatwić organizację pobytu. Kontaktując się z wybranym miejscem, pamiętaj o wspomnieniu, że jesteś gościem na naszym ślubie: zostanie naliczona zniżka, jednak dostępność pokoi zależy od wcześniejszych rezerwacji. Zalecamy więc rezerwację z wyprzedzeniem, aby spokojnie wybrać najwygodniejsze rozwiązanie.",
+    alatriTitle: "Alatri",
+    alatriText1: "Alatri, to miasto w którym dorastaliśmy. Miejsce, gdzie nasze ścieżki skrzyżowały się przez przypadek, by połączyć się na zawsze. Znajduje się w sercu Ciociarii -historycznego regionu południowego Lacjum- pełnego tradycji, folkloru, urokliwych miasteczek i smaków, które kojarzą się z domem. Jeśli przyjedziesz trochę wcześniej, polecamy spokojnie odkryć miasto i zatrzymać się na kufelek piwa w pubie Guinness, gdzie wszystko się zaczęło.",
+    alatriText2: "Pomysły i plany podróży znajdziesz tutaj:",
+    alatriLink: "Portal turystyczny Ciociaria",
+    programmaTitle: "Program", programmaDesc: "Najpiękniejszy dzień",
+    progCerimonia: "Ceremonia", progCerimoniaDesc: "Wymiana przysiąg",
+    progAperitivo: "Aperitif", progAperitivoDesc: "Tosty i przekąski",
+    progPranzo: "Obiad weselny", progPranzoDesc: "Uroczysta kolacja",
+    progTorta: "Krojenie tortu", progTortaDesc: "Słodki moment razem",
+    expectTitle: "Czego się spodziewać", expectSubtitle: "Włosko-polskie wesele",
+    serenataTitle: "Tradycyjna Serenada",
+    serenataText: "Kilka dni przed ślubem, oficjalnie rozpoczniemy uroczystości ślubne tradycyjną serenadą. Tańce, hulanki i swawole, nie może Cię zabraknąć! O szczegóły pytaj Pana Młodego… pamiętaj, to tajemnica! 😉",
+    pranzoTitle: "Włoski obiad", pranzoText: "Przygotuj się na włoską ucztę – długie, biesiadne i pełne smaków doświadczenie przy stole!",
+    vodkaTitle: "Wódka Weselna", vodkaText: "Na zdrowie!' - weź udział w tradycyjnym polskim toaście.",
+    rsvpTitle: "Potwierdzenie", rsvpDesc: "Potwierdź swoją obecność",
+    nomeLabel: "Imię i nazwisko", nomePlaceholder: "Wpisz swoje imię",
+    emailLabel: "Email", emailPlaceholder: "email@example.com",
+    partecipiLabel: "Czy weźmiesz udział?", si: "Tak, będę!", no: "Niestety nie mogę",
+    ospitiLabel: "Liczba gości", allergieLabel: "Alergie lub specjalne diety",
+    messaggioLabel: "Wiadomość dla nowożeńców", messaggioPlaceholder: "Napisz coś od siebie...", invia: "Wyślij potwierdzenie",
+    fotoTitle: "Udostępnij zdjęcia", fotoDesc: "Uwiecznij magiczne chwile",
+    fotoText: "Zeskanuj kod QR, aby przesłać zdjęcia bezpośrednio do naszej wspólnej chmury. Liczy się każdy moment!",
     scansiona: "Zeskanuj, aby przesłać",
-    dressCode: "Dress Code", comeVestirsi: "Jak się ubrać", elegante: "Elegancki formalny", abito: "Długa sukienka lub midi dla pań, ciemny garnitur dla panów",
-    colori: "Zalecane kolory", tonalita: "Pastelowe odcienie, szałwia zielona, beż, róż cipria. Unikaj bieli (zarezerwowanej dla panny młodej)",
-    alloggio: "Zakwaterowanie", doveSoggiornare: "Gdzie się zatrzymać", strutture: "Struktury partnerskie będą dostępne wkrótce",
-    cosaAspettarsi: "Czego się spodziewać", matrimonio: "Włosko-polskie wesele", paneSale: "Chleb i sól", paneDesc: "Polska tradycja powitania nowożeńców chlebem (prosperity) i solą (ochrona przed trudnościami)",
-    tradizioniPolacche: "POLSKIE TRADYCJE", pranzoItaliano: "Włoski obiad", pranzoItalianoDesc: "Przygotujcie się na ucztę z przystawkami, pierwszymi, drugimi i deserami. Włoski posiłek to długie i towarzyskie doświadczenie!",
-    tradizioniItaliane: "WŁOSKIE TRADYCJE", vodka: "Wódka", vodkaDesc: "Polska tradycja toastu: 'Na zdrowie!' (Na zdrowie!) - przygotujcie się na świętowanie z klasycznymi polskimi shotami",
+    datiTitle: "Ważne dla nas",
+    datiText: "Mamy wielką nadzieję, że będziesz towarzyszyć nam w tak ważnych dla nas chwilach.",
+    datiIntestato: "Jeśli chcesz dołożyć się do naszej podróży poślubnej, naszych marzeń lub po prostu postawić nam piwo na plaży:",
+    grazie: "Dziękujemy z całego serca ♡"
   }
 };
 
@@ -206,18 +240,19 @@ function setLanguage(lang) {
   const t = translations[lang];
   if (!t) return;
 
-  try {
+try {
     // Navigazione
-    safeSetText('a[href="#home"]', t.home);
-    safeSetText('a[href="#location"]', t.location);
-    safeSetText('a[href="#programma"]', t.programma);
-    safeSetText('a[href="#rsvp"]', t.rsvp);
-    safeSetText('a[href="#foto"]', t.foto);
-    safeSetText('a[href="#guestbook"]', t.guestbook);
+    safeSetText('a[href="#home"]', t.navHome);
+    safeSetText('a[href="#cerimonia"]', t.navCerimonia);
+    safeSetText('a[href="#location"]', t.navLocation);
+    safeSetText('a[href="#alloggio "]', t.navAlloggio); 
+    safeSetText('a[href="#alatri"]', t.navAlatri);
+    safeSetText('a[href="#rsvp"]', t.navRsvp);
+    safeSetText('a[href="#foto"]', t.navFoto);
+    safeSetText('a[href="#dati"]', t.navDati);
 
-    // home e Countdown
+    // Home
     safeSetText('.home-subtitle', t.homeSubtitle);
-    safeSetText('.home-title', t.homeTitle);
     safeSetText('.home-date span:first-child', t.homeDate);
     safeSetText('.home-date span:nth-child(2)', t.homeTime);
     safeSetText('.home-button', t.saveDate);
@@ -226,76 +261,102 @@ function setLanguage(lang) {
     safeSetText('#label-minutes', t.minutes);
     safeSetText('#label-seconds', t.seconds);
 
-    // Location
+    // Cerimonia & Location
+    safeSetText('#cerimonia .section-intro h2', t.cerimoniaTitle);
+    safeSetText('#cerimonia .section-intro p', t.cerimoniaDesc);
+    safeSetText('#cerimonia .button', t.portamiLi);
     safeSetText('#location .section-intro h2', t.locationTitle);
     safeSetText('#location .section-intro p', t.locationDesc);
     safeSetText('#location .button', t.portamiLi);
 
+    // Alloggio
+    safeSetText('#alloggio .section-intro h2', t.alloggioTitle);
+    safeSetText('#alloggio .info-card p.justify', t.alloggioText);
+
+    // Alatri
+    safeSetText('#alatri .section-intro h2', t.alatriTitle);
+    const alatriParagraphs = document.querySelectorAll('#alatri .info-card p');
+    if (alatriParagraphs.length >= 2) {
+      alatriParagraphs[0].textContent = t.alatriText1;
+      alatriParagraphs[1].textContent = t.alatriText2;
+    }
+    safeSetText('#alatri .info-card .button', t.alatriLink);
+
     // Programma
     safeSetText('#programma .section-intro h2', t.programmaTitle);
     safeSetText('#programma .section-intro p', t.programmaDesc);
-    safeSetText('#programma .timeline-event:nth-child(1) h3', t.cerimonia);
-    safeSetText('#programma .timeline-event:nth-child(1) p', t.cerimoniaDesc);
-    safeSetText('#programma .timeline-event:nth-child(2) h3', t.aperitivo);
-    safeSetText('#programma .timeline-event:nth-child(2) p', t.aperitivoDesc);
-    safeSetText('#programma .timeline-event:nth-child(3) h3', t.pranzo);
-    safeSetText('#programma .timeline-event:nth-child(3) p', t.pranzoDesc);
-    safeSetText('#programma .timeline-event:nth-child(4) h3', t.torta);
-    safeSetText('#programma .timeline-event:nth-child(4) p', t.tortaDesc);
+    safeSetText('#programma .timeline-event:nth-child(1) h3', t.progCerimonia);
+    safeSetText('#programma .timeline-event:nth-child(1) p', t.progCerimoniaDesc);
+    safeSetText('#programma .timeline-event:nth-child(2) h3', t.progAperitivo);
+    safeSetText('#programma .timeline-event:nth-child(2) p', t.progAperitivoDesc);
+    safeSetText('#programma .timeline-event:nth-child(3) h3', t.progPranzo);
+    safeSetText('#programma .timeline-event:nth-child(3) p', t.progPranzoDesc);
+    safeSetText('#programma .timeline-event:nth-child(4) h3', t.progTorta);
+    safeSetText('#programma .timeline-event:nth-child(4) p', t.progTortaDesc);
+
+    // Cosa Aspettarsi
+    const finalGrid = document.querySelector('.final-grid');
+    if (finalGrid) {
+      const pSubtitle = finalGrid.previousElementSibling; 
+      if (pSubtitle) {
+        pSubtitle.textContent = t.expectSubtitle;
+        const h2Title = pSubtitle.previousElementSibling; 
+        if (h2Title) h2Title.textContent = t.expectTitle;
+      }
+      
+      const finalCards = finalGrid.querySelectorAll('.final-card');
+      if (finalCards.length >= 3) {
+        finalCards[0].querySelector('h3').textContent = t.serenataTitle;
+        finalCards[0].querySelector('p').textContent = t.serenataText;
+        
+        finalCards[1].querySelector('h3').textContent = t.pranzoTitle;
+        finalCards[1].querySelector('p').textContent = t.pranzoText;
+        
+        finalCards[2].querySelector('h3').textContent = t.vodkaTitle;
+        finalCards[2].querySelector('p').textContent = t.vodkaText;
+      }
+    }
 
     // RSVP
     safeSetText('#rsvp .section-intro h2', t.rsvpTitle);
     safeSetText('#rsvp .section-intro p', t.rsvpDesc);
-    safeSetText('#rsvpForm .field-row:first-of-type label:first-of-type span', t.nome);
+    safeSetText('#rsvpForm .field-row:first-of-type label:first-of-type span', t.nomeLabel);
     safeSetPlaceholder('#rsvpForm input[name="name"]', t.nomePlaceholder);
-    safeSetText('#rsvpForm .field-row:first-of-type label:nth-of-type(2) span', t.email);
+    safeSetText('#rsvpForm .field-row:first-of-type label:nth-of-type(2) span', t.emailLabel);
     safeSetPlaceholder('#rsvpForm input[name="email"]', t.emailPlaceholder);
-    safeSetText('#rsvpForm .radio-row span', t.partecipi);
+    safeSetText('#rsvpForm .radio-row > span', t.partecipiLabel);
     safeSetText('#rsvpForm .radio-row label:first-of-type span', t.si);
     safeSetText('#rsvpForm .radio-row label:nth-of-type(2) span', t.no);
-    safeSetText('#rsvpForm > label:nth-child(3) span', t.ospiti);
-    safeSetText('#rsvpForm > label:nth-child(4) span', t.allergie);
+    safeSetText('#rsvpForm > label:nth-of-type(1) span', t.ospitiLabel); 
+    safeSetText('#rsvpForm > label:nth-of-type(2) span', t.allergieLabel);
     safeSetPlaceholder('#rsvpForm input[name="diet"]', t.allergiePlaceholder);
-    safeSetText('#rsvpForm > label:nth-child(5) span', t.messaggio);
+    safeSetText('#rsvpForm > label:nth-of-type(3) span', t.messaggioLabel);
     safeSetPlaceholder('#rsvpForm textarea[name="message"]', t.messaggioPlaceholder);
     safeSetText('#rsvpForm button[type="submit"]', t.invia);
-    safeSetText('#rsvpForm .form-note', t.grazie);
 
     // Foto
     safeSetText('#foto .section-intro h2', t.fotoTitle);
     safeSetText('#foto .section-intro p', t.fotoDesc);
-    safeSetText('#foto .foto-card p', t.fotoText);
+    safeSetText('#foto .foto-card > p:first-of-type', t.fotoText);
     safeSetText('#foto .caption', t.scansiona);
 
-    // Guestbook
-    safeSetText('#guestbook .section-intro h2', t.guestbookTitle);
-    safeSetText('#guestbook .section-intro p', t.guestbookDesc);
-    safeSetText('#guestbookForm label:first-child span', t.tuoNome);
-    safeSetPlaceholder('#guestbookForm input[name="guestName"]', t.tuoNomePlaceholder);
-    safeSetText('#guestbookForm label:nth-child(2) span', t.scriviMessaggio);
-    safeSetPlaceholder('#guestbookForm textarea[name="guestMessage"]', t.scriviMessaggio);
-    safeSetText('#guestbookForm button[type="submit"]', t.lasciaMessaggio);
-    safeSetText('.guestbook-note p', t.primo);
-
-    // Info
-    safeSetText('.info-card:nth-child(1) h3', t.alloggio);
-    safeSetText('.info-card:nth-child(1) p:nth-child(3)', t.doveSoggiornare);
-
-    // Finale
-    safeSetText('.section-finale .section-intro h2', t.cosaAspettarsi);
-    safeSetText('.section-finale .section-intro p', t.matrimonio);
-    safeSetText('.final-card:nth-child(1) h3', t.paneSale);
-    safeSetText('.final-card:nth-child(1) p', t.paneDesc);
-    safeSetText('.final-card:nth-child(1) span', t.tradizioniPolacche);
-    safeSetText('.final-card:nth-child(2) h3', t.pranzoItaliano);
-    safeSetText('.final-card:nth-child(2) p', t.pranzoItalianoDesc);
-    safeSetText('.final-card:nth-child(2) span', t.tradizioniItaliane);
-    safeSetText('.final-card:nth-child(3) h3', t.vodka);
-    safeSetText('.final-card:nth-child(3) p', t.vodkaDesc);
-    safeSetText('.final-card:nth-child(3) span', t.tradizioniPolacche);
-  } catch (error) {
-    console.error("Errore durante la traduzione", error);
-  }
+    // Dati
+    const datiSections = document.querySelectorAll('#dati');
+    if (datiSections.length > 0) {
+      const firstDati = datiSections[0];
+      const h2Dati1 = firstDati.querySelector('.section-intro h2');
+      if (h2Dati1) h2Dati1.textContent = t.datiTitle;
+      const pDati1 = firstDati.querySelector('.section-intro p');
+      if (pDati1) pDati1.textContent = t.datiText;
+      const intestatoP = firstDati.querySelector('.card-iban p');
+      if (intestatoP) intestatoP.textContent = t.datiIntestato;
+      
+      if (datiSections.length > 1) {
+        const secondDati = datiSections[1];
+        const h2Dati2 = secondDati.querySelector('.section-intro h2');
+        if (h2Dati2) h2Dati2.textContent = t.grazie;
+      }
+    }
 
   // Aggiorna active button
   document.querySelectorAll('.lang-switcher button').forEach(btn => btn.classList.remove('active'));
