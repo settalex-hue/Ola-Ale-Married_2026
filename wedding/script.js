@@ -10,22 +10,13 @@ try {
 }
 
 // ==========================================
-// VARIABILI GLOBALI
+// VARIABILI GLOBALI E COUNTDOWN
 // ==========================================
-const sealButton = document.getElementById("sealButton");
-const toast = document.getElementById("toast");
-const messageList = document.getElementById("messageList");
 const rsvpForm = document.getElementById("rsvpForm");
-const homeSection = document.getElementById("home");
-let introAnimated = false;
-
-// ==========================================
-// GESTIONE COUNTDOWN (Reso Anti-Blocco)
-// ==========================================
-const targetDate = new Date("2026-09-26T11:00:00").getTime();
+const toast = document.getElementById("toast");
+const targetDate = new Date("2026-09-26T11:30:00").getTime();
 
 function updateCountdown() {
-  // Peschiamo gli elementi ogni secondo, così anche se cambiano lingua, non si rompono
   const dEl = document.getElementById("days");
   const hEl = document.getElementById("hours");
   const mEl = document.getElementById("minutes");
@@ -37,22 +28,14 @@ function updateCountdown() {
   const diff = targetDate - now;
 
   if (diff <= 0) {
-    dEl.innerText = "00";
-    hEl.innerText = "00";
-    mEl.innerText = "00";
-    sEl.innerText = "00";
+    dEl.innerText = "00"; hEl.innerText = "00"; mEl.innerText = "00"; sEl.innerText = "00";
     return;
   }
 
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-  dEl.innerText = String(days).padStart(2, "0");
-  hEl.innerText = String(hours).padStart(2, "0");
-  mEl.innerText = String(minutes).padStart(2, "0");
-  sEl.innerText = String(seconds).padStart(2, "0");
+  dEl.innerText = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, "0");
+  hEl.innerText = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, "0");
+  mEl.innerText = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, "0");
+  sEl.innerText = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, "0");
 }
 
 setInterval(updateCountdown, 1000);
@@ -62,22 +45,12 @@ updateCountdown();
 // FUNZIONE CALENDARIO (SAVE THE DATE)
 // ==========================================
 function aggiungiAlCalendario() {
-  const titolo = "Matrimonio Aleksandra & Alessandro";
-  const luogo = "Tenuta Il Sogno - Piglio, FR";
-  const descrizione = "Non mancare al nostro giorno speciale!";
-  const dataInizio = "20260926T110000";
-  const dataFine = "20260926T235900";
-
-  const icsMSG = "BEGIN:VCALENDAR\n" +
-    "VERSION:2.0\n" +
-    "BEGIN:VEVENT\n" +
-    "DTSTART:" + dataInizio + "\n" +
-    "DTEND:" + dataFine + "\n" +
-    "SUMMARY:" + titolo + "\n" +
-    "LOCATION:" + luogo + "\n" +
-    "DESCRIPTION:" + descrizione + "\n" +
-    "END:VEVENT\n" +
-    "END:VCALENDAR";
+  const icsMSG = "BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\n" +
+    "DTSTART:20260926T113000\nDTEND:20260926T235900\n" +
+    "SUMMARY:Matrimonio Aleksandra & Alessandro\n" +
+    "LOCATION:Tenuta Il Sogno - Piglio, FR\n" +
+    "DESCRIPTION:Non mancare al nostro giorno speciale!\n" +
+    "END:VEVENT\nEND:VCALENDAR";
 
   const blob = new Blob([icsMSG], { type: 'text/calendar;charset=utf-8' });
   const link = document.createElement('a');
@@ -95,7 +68,6 @@ function aggiungiAlCalendario() {
 if (rsvpForm) {
   rsvpForm.addEventListener("submit", (event) => {
     event.preventDefault();
-
     const btn = rsvpForm.querySelector('button');
     const originalText = btn.innerText;
     btn.innerText = "Invio in corso...";
@@ -122,9 +94,6 @@ if (rsvpForm) {
   });
 }
 
-// ==========================================
-// GESTIONE NOTIFICHE (TOAST)
-// ==========================================
 function showToast(message) {
   if (!toast) return;
   toast.textContent = message;
@@ -135,8 +104,7 @@ function showToast(message) {
 // ==========================================
 // SCROLL MORBIDO NAVIGAZIONE
 // ==========================================
-const navLinks = document.querySelectorAll(".main-nav a");
-navLinks.forEach((link) => {
+document.querySelectorAll(".main-nav a").forEach((link) => {
   link.addEventListener("click", (event) => {
     if (link.hash.startsWith("#")) {
       event.preventDefault();
@@ -177,7 +145,7 @@ const translations = {
     nomeLabel: "Nome e Cognome", nomePlaceholder: "Inserisci il tuo nome",
     emailLabel: "Email", emailPlaceholder: "email@example.com",
     partecipiLabel: "Parteciperai?", si: "Sì, ci sarò!", no: "Purtroppo non potrò",
-    ospitiLabel: "Numero di ospiti", allergieLabel: "Allergie o diete speciali",
+    ospitiLabel: "Numero di ospiti", allergieLabel: "Allergie o diete speciali", allergiePlaceholder: "Es: vegetariano, celiaco, allergie...",
     messaggioLabel: "Un messaggio per gli sposi", messaggioPlaceholder: "Scrivi un pensiero...", invia: "Invia conferma",
     fotoTitle: "Condividi le Foto", fotoDesc: "Cattura i momenti magici",
     fotoText: "Scansiona il QR code per caricare le foto direttamente nel nostro cloud condiviso. Ogni momento conta!",
@@ -214,7 +182,7 @@ const translations = {
     nomeLabel: "Imię i nazwisko", nomePlaceholder: "Wpisz swoje imię",
     emailLabel: "Email", emailPlaceholder: "email@example.com",
     partecipiLabel: "Czy weźmiesz udział?", si: "Tak, będę!", no: "Niestety nie mogę",
-    ospitiLabel: "Liczba gości", allergieLabel: "Alergie lub specjalne diety",
+    ospitiLabel: "Liczba gości", allergieLabel: "Alergie lub specjalne diety", allergiePlaceholder: "Np: wegetarianin, celiak, alergie...",
     messaggioLabel: "Wiadomość dla nowożeńców", messaggioPlaceholder: "Napisz coś od siebie...", invia: "Wyślij potwierdzenie",
     fotoTitle: "Udostępnij zdjęcia", fotoDesc: "Uwiecznij magiczne chwile",
     fotoText: "Zeskanuj kod QR, aby przesłać zdjęcia bezpośrednio do naszej wspólnej chmury. Liczy się każdy moment!",
@@ -240,7 +208,8 @@ function setLanguage(lang) {
   const t = translations[lang];
   if (!t) return;
 
-  // Navigazione
+  try {
+    // Navigazione
     safeSetText('a[href="#home"]', t.navHome);
     safeSetText('a[href="#cerimonia"]', t.navCerimonia);
     safeSetText('a[href="#location"]', t.navLocation);
@@ -276,8 +245,8 @@ function setLanguage(lang) {
     safeSetText('#alatri .section-intro h2', t.alatriTitle);
     const alatriParagraphs = document.querySelectorAll('#alatri .info-card p');
     if (alatriParagraphs.length >= 2) {
-      alatriParagraphs[0].textContent = t.alatriText1;
-      alatriParagraphs[1].textContent = t.alatriText2;
+      if (alatriParagraphs[0]) alatriParagraphs[0].textContent = t.alatriText1;
+      if (alatriParagraphs[1]) alatriParagraphs[1].textContent = t.alatriText2;
     }
     safeSetText('#alatri .info-card .button', t.alatriLink);
 
@@ -293,27 +262,33 @@ function setLanguage(lang) {
     safeSetText('#programma .timeline-event:nth-child(4) h3', t.progTorta);
     safeSetText('#programma .timeline-event:nth-child(4) p', t.progTortaDesc);
 
-    // Cosa Aspettarsi
-    const finalGrid = document.querySelector('.final-grid');
-    if (finalGrid) {
-      const pSubtitle = finalGrid.previousElementSibling; 
-      if (pSubtitle) {
-        pSubtitle.textContent = t.expectSubtitle;
-        const h2Title = pSubtitle.previousElementSibling; 
-        if (h2Title) h2Title.textContent = t.expectTitle;
+    // Cosa Aspettarsi (Risolto bug critico di annidamento HTML)
+    document.querySelectorAll('h2').forEach(h2 => {
+      if (h2.textContent.includes("Cosa Aspettarsi") || h2.textContent.includes("Czego się spodziewać")) {
+        h2.textContent = t.expectTitle;
+        const pNext = h2.nextElementSibling;
+        if (pNext && pNext.tagName === 'P') {
+          pNext.textContent = t.expectSubtitle;
+        }
       }
+    });
+
+    const finalCards = document.querySelectorAll('.final-grid .final-card');
+    if (finalCards.length >= 3) {
+      const h3_0 = finalCards[0].querySelector('h3');
+      const p_0 = finalCards[0].querySelector('p');
+      if (h3_0) h3_0.textContent = t.serenataTitle;
+      if (p_0) p_0.textContent = t.serenataText;
       
-      const finalCards = finalGrid.querySelectorAll('.final-card');
-      if (finalCards.length >= 3) {
-        finalCards[0].querySelector('h3').textContent = t.serenataTitle;
-        finalCards[0].querySelector('p').textContent = t.serenataText;
-        
-        finalCards[1].querySelector('h3').textContent = t.pranzoTitle;
-        finalCards[1].querySelector('p').textContent = t.pranzoText;
-        
-        finalCards[2].querySelector('h3').textContent = t.vodkaTitle;
-        finalCards[2].querySelector('p').textContent = t.vodkaText;
-      }
+      const h3_1 = finalCards[1].querySelector('h3');
+      const p_1 = finalCards[1].querySelector('p');
+      if (h3_1) h3_1.textContent = t.pranzoTitle;
+      if (p_1) p_1.textContent = t.pranzoText;
+      
+      const h3_2 = finalCards[2].querySelector('h3');
+      const p_2 = finalCards[2].querySelector('p');
+      if (h3_2) h3_2.textContent = t.vodkaTitle;
+      if (p_2) p_2.textContent = t.vodkaText;
     }
 
     // RSVP
@@ -326,10 +301,16 @@ function setLanguage(lang) {
     safeSetText('#rsvpForm .radio-row > span', t.partecipiLabel);
     safeSetText('#rsvpForm .radio-row label:first-of-type span', t.si);
     safeSetText('#rsvpForm .radio-row label:nth-of-type(2) span', t.no);
-    safeSetText('#rsvpForm > label:nth-of-type(1) span', t.ospitiLabel); 
-    safeSetText('#rsvpForm > label:nth-of-type(2) span', t.allergieLabel);
+    
+    // Label flessibili nel form
+    const rsvpLabels = document.querySelectorAll('#rsvpForm > label > span');
+    if (rsvpLabels.length >= 3) {
+       rsvpLabels[0].textContent = t.ospitiLabel;
+       rsvpLabels[1].textContent = t.allergieLabel;
+       rsvpLabels[2].textContent = t.messaggioLabel;
+    }
+    
     safeSetPlaceholder('#rsvpForm input[name="diet"]', t.allergiePlaceholder);
-    safeSetText('#rsvpForm > label:nth-of-type(3) span', t.messaggioLabel);
     safeSetPlaceholder('#rsvpForm textarea[name="message"]', t.messaggioPlaceholder);
     safeSetText('#rsvpForm button[type="submit"]', t.invia);
 
@@ -339,31 +320,36 @@ function setLanguage(lang) {
     safeSetText('#foto .foto-card > p:first-of-type', t.fotoText);
     safeSetText('#foto .caption', t.scansiona);
 
-    // Dati
-    const datiSections = document.querySelectorAll('#dati');
-    if (datiSections.length > 0) {
-      const firstDati = datiSections[0];
+    // Dati (Risolto bug doppio ID)
+    const firstDati = document.querySelector('#dati');
+    if (firstDati) {
       const h2Dati1 = firstDati.querySelector('.section-intro h2');
       if (h2Dati1) h2Dati1.textContent = t.datiTitle;
       const pDati1 = firstDati.querySelector('.section-intro p');
       if (pDati1) pDati1.textContent = t.datiText;
       const intestatoP = firstDati.querySelector('.card-iban p');
       if (intestatoP) intestatoP.textContent = t.datiIntestato;
-      
-      if (datiSections.length > 1) {
-        const secondDati = datiSections[1];
-        const h2Dati2 = secondDati.querySelector('.section-intro h2');
-        if (h2Dati2) h2Dati2.textContent = t.grazie;
-      }
     }
 
-  // Aggiorna active button
+    document.querySelectorAll('.section-intro h2').forEach(h2 => {
+      if (h2.textContent.includes("Grazie di cuore") || h2.textContent.includes("Dziękujemy")) {
+        h2.textContent = t.grazie;
+      }
+    });
+
+  } catch (error) {
+    console.error("Errore durante la traduzione:", error);
+  }
+
+  // Aggiorna classe "active"
   document.querySelectorAll('.lang-switcher button').forEach(btn => btn.classList.remove('active'));
   const firstBtn = document.querySelector('.lang-switcher button:first-child');
   const lastBtn = document.querySelector('.lang-switcher button:last-child');
 
   if (lang === 'it' && firstBtn) firstBtn.classList.add('active');
   if (lang === 'pl' && lastBtn) lastBtn.classList.add('active');
+}
+
 // Inizializza pulsanti lingua
 const btnIt = document.querySelector('.lang-switcher button:first-child');
 const btnPl = document.querySelector('.lang-switcher button:last-child');
@@ -372,4 +358,3 @@ if (btnPl) btnPl.addEventListener('click', () => setLanguage('pl'));
 
 // Avvia italiano di default
 setLanguage('it');
-}
