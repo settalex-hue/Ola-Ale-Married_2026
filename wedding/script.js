@@ -240,8 +240,7 @@ function setLanguage(lang) {
   const t = translations[lang];
   if (!t) return;
 
-try {
-    // Navigazione
+  // Navigazione
     safeSetText('a[href="#home"]', t.navHome);
     safeSetText('a[href="#cerimonia"]', t.navCerimonia);
     safeSetText('a[href="#location"]', t.navLocation);
@@ -365,8 +364,6 @@ try {
 
   if (lang === 'it' && firstBtn) firstBtn.classList.add('active');
   if (lang === 'pl' && lastBtn) lastBtn.classList.add('active');
-}
-
 // Inizializza pulsanti lingua
 const btnIt = document.querySelector('.lang-switcher button:first-child');
 const btnPl = document.querySelector('.lang-switcher button:last-child');
@@ -375,3 +372,4 @@ if (btnPl) btnPl.addEventListener('click', () => setLanguage('pl'));
 
 // Avvia italiano di default
 setLanguage('it');
+}
