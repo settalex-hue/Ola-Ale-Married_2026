@@ -123,8 +123,11 @@ const translations = {
     navAlatri: "Alatri", navProgramma: "Programma", navRsvp: "RSVP", navFoto: "Foto", navDati: "Dati",
     homeSubtitle: "Il matrimonio di", homeDate: "26 Settembre 2026", homeTime: "Ore 11:30", saveDate: "Save the Date",
     days: "giorni", hours: "ore", minutes: "minuti", seconds: "secondi",
-    cerimoniaTitle: "Cerimonia", cerimoniaDesc: "Dove celebreremo il nostro amore", portamiLi: "Portami lì",
+    cerimoniaTitle: "Cerimonia", cerimoniaDesc: "Dove celebreremo il nostro amore",
+    locCerimoniaNome: "Cattedrale di S.Paolo - Civita",
     locationTitle: "Location", locationDesc: "Dove festeggeremo",
+    locRicevimentoNome: "Tenuta Il Sogno - Piglio, FR",
+    portamiLi: "Portami lì",
     alloggioTitle: "Alloggio",
     alloggioText: "Per chi arriverà da fuori, abbiamo pensato ad alcune strutture convenzionate in zona, così da rendere l’organizzazione del soggiorno più semplice. Quando contattaterai la struttura, ricordati di indicare che parteciperai al nostro matrimonio: la convenzione sarà applicata, mentre la disponibilità delle camere resterà soggetta alle prenotazioni già ricevute. Ti consigliamo quindi di muoverti con un po’ di anticipo, così da scegliere con calma la soluzione più comoda.",
     alatriTitle: "Alatri",
@@ -160,8 +163,11 @@ const translations = {
     navAlatri: "Alatri", navProgramma: "Program", navRsvp: "Potwierdzenie", navFoto: "Zdjęcia", navDati: "Dane",
     homeSubtitle: "Ślub", homeDate: "26 Września 2026", homeTime: "Godzina 11:30", saveDate: "Zapisz datę",
     days: "dni", hours: "godziny", minutes: "minuty", seconds: "sekundy",
-    cerimoniaTitle: "Ceremonia", cerimoniaDesc: "Cerimonia ślubna odbędzie się w", portamiLi: "Zabierz mnie tam",
+    cerimoniaTitle: "Ceremonia", cerimoniaDesc: "Cerimonia ślubna odbędzie się w",
+    locCerimoniaNome: "Katedra św. Pawła - Civita",
     locationTitle: "Wesele", locationDesc: "Przyjęcie weselne odbędzie się w",
+    locRicevimentoNome: "Willa marzeń - Piglio, FR",
+    portamiLi: "Zabierz mnie tam",
     alloggioTitle: "Nocleg",
     alloggioText: "Dla osób przybywających z daleka przygotowaliśmy kilka rekomendowanych obiektów w okolicy, aby ułatwić organizację pobytu. Kontaktując się z wybranym miejscem, pamiętaj o wspomnieniu, że jesteś gościem na naszym ślubie: zostanie naliczona zniżka, jednak dostępność pokoi zależy od wcześniejszych rezerwacji. Zalecamy więc rezerwację z wyprzedzeniem, aby spokojnie wybrać najwygodniejsze rozwiązanie.",
     alatriTitle: "Alatri",
@@ -232,9 +238,12 @@ function setLanguage(lang) {
     // Cerimonia & Location
     safeSetText('#cerimonia .section-intro h2', t.cerimoniaTitle);
     safeSetText('#cerimonia .section-intro p', t.cerimoniaDesc);
+    safeSetText('#cerimonia .location-details h3', t.locCerimoniaNome);
     safeSetText('#cerimonia .button', t.portamiLi);
+    
     safeSetText('#location .section-intro h2', t.locationTitle);
     safeSetText('#location .section-intro p', t.locationDesc);
+    safeSetText('#location .location-details h3', t.locRicevimentoNome);
     safeSetText('#location .button', t.portamiLi);
 
     // Alloggio
@@ -262,7 +271,7 @@ function setLanguage(lang) {
     safeSetText('#programma .timeline-event:nth-child(4) h3', t.progTorta);
     safeSetText('#programma .timeline-event:nth-child(4) p', t.progTortaDesc);
 
-    // Cosa Aspettarsi (Risolto bug critico di annidamento HTML)
+    // Cosa Aspettarsi
     document.querySelectorAll('h2').forEach(h2 => {
       if (h2.textContent.includes("Cosa Aspettarsi") || h2.textContent.includes("Czego się spodziewać")) {
         h2.textContent = t.expectTitle;
@@ -302,7 +311,6 @@ function setLanguage(lang) {
     safeSetText('#rsvpForm .radio-row label:first-of-type span', t.si);
     safeSetText('#rsvpForm .radio-row label:nth-of-type(2) span', t.no);
     
-    // Label flessibili nel form
     const rsvpLabels = document.querySelectorAll('#rsvpForm > label > span');
     if (rsvpLabels.length >= 3) {
        rsvpLabels[0].textContent = t.ospitiLabel;
@@ -320,7 +328,7 @@ function setLanguage(lang) {
     safeSetText('#foto .foto-card > p:first-of-type', t.fotoText);
     safeSetText('#foto .caption', t.scansiona);
 
-    // Dati (Risolto bug doppio ID)
+    // Dati
     const firstDati = document.querySelector('#dati');
     if (firstDati) {
       const h2Dati1 = firstDati.querySelector('.section-intro h2');
@@ -341,7 +349,6 @@ function setLanguage(lang) {
     console.error("Errore durante la traduzione:", error);
   }
 
-  // Aggiorna classe "active"
   document.querySelectorAll('.lang-switcher button').forEach(btn => btn.classList.remove('active'));
   const firstBtn = document.querySelector('.lang-switcher button:first-child');
   const lastBtn = document.querySelector('.lang-switcher button:last-child');
@@ -350,11 +357,9 @@ function setLanguage(lang) {
   if (lang === 'pl' && lastBtn) lastBtn.classList.add('active');
 }
 
-// Inizializza pulsanti lingua
 const btnIt = document.querySelector('.lang-switcher button:first-child');
 const btnPl = document.querySelector('.lang-switcher button:last-child');
 if (btnIt) btnIt.addEventListener('click', () => setLanguage('it'));
 if (btnPl) btnPl.addEventListener('click', () => setLanguage('pl'));
 
-// Avvia italiano di default
 setLanguage('it');
