@@ -1,5 +1,5 @@
 // ==========================================
-// SICUREZZA INIZIALE EMAILJS
+// SICUREZZA INIZIALE EMAILJSd
 // ==========================================
 try {
   if (typeof emailjs !== 'undefined') {
@@ -327,6 +327,7 @@ function setLanguage(lang) {
     safeSetPlaceholder('#rsvpForm input[name="diet"]', t.allergiePlaceholder);
     safeSetPlaceholder('#rsvpForm textarea[name="message"]', t.messaggioPlaceholder);
     safeSetText('#rsvpForm button[type="submit"]', t.invia);
+    safeSetText('#rsvpForm .form-note', t.rsvpDeadline); 
 
     // Foto
     safeSetText('#foto .section-intro h2', t.fotoTitle);
