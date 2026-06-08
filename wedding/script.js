@@ -119,7 +119,7 @@ document.querySelectorAll(".main-nav a").forEach((link) => {
 // ==========================================
 const translations = {
   it: {
-    navHome: "Home", navCerimonia: "Cerimonia", navLocation: "Location", navAlloggio: "Alloggio", 
+    navHome: "Home", navCerimonia: "Cerimonia", navLocation: "Location", navAlloggio: "Alloggio",
     navAlatri: "Alatri", navProgramma: "Programma", navRsvp: "RSVP", navFoto: "Foto", navDati: "Dati",
     homeSubtitle: "Il matrimonio di", homeDate: "26 Settembre 2026", homeTime: "Ore 11:00", saveDate: "Save the Date",
     days: "giorni", hours: "ore", minutes: "minuti", seconds: "secondi",
@@ -144,7 +144,7 @@ const translations = {
     serenataText: "Qualche sera prima del matrimonio daremo il via ai festeggiamenti con una serenata folkloristica in abiti tipici della tradizione, tra canti, musica e momenti in compagnia. Non puoi mancare! Per i dettagli rivolgiti allo sposo… mi raccomando, è un segreto! 😉",
     pranzoTitle: "Il pranzo italiano", pranzoText: "Preparati a un banchetto all’italiana: un momento conviviale, ricco di sapori e profumi da condividere insieme!",
     vodkaTitle: "Vodka", vodkaText: "'Na zdrowie!' - alla salute! Tieniti pronto per il brindisi polacco a base di vodka e a cantare 'Gorzka wódka!' ogni volta che vorrai invitare gli sposi a darsi un bacio.",
-    rsvpTitle: "Répondez S’il Vous Plaît", rsvpDesc: "Conferma la tua presenza", 
+    rsvpTitle: "Répondez S’il Vous Plaît", rsvpDesc: "Conferma la tua presenza",
     nomeLabel: "Nome e Cognome", nomePlaceholder: "Inserisci il tuo nome",
     emailLabel: "Email", emailPlaceholder: "email@example.com (facoltativa)",
     partecipiLabel: "Parteciperai?", si: "Sì, ci sarò!", no: "Purtroppo non potrò",
@@ -159,7 +159,7 @@ const translations = {
     grazie: "Grazie di cuore ♡"
   },
   pl: {
-    navHome: "Dom", navCerimonia: "Ceremonia", navLocation: "Wesele", navAlloggio: "Nocleg", 
+    navHome: "Dom", navCerimonia: "Ceremonia", navLocation: "Wesele", navAlloggio: "Nocleg",
     navAlatri: "Alatri", navProgramma: "Program", navRsvp: "Potwierdzenie", navFoto: "Zdjęcia", navDati: "Dane",
     homeSubtitle: "Ślub", homeDate: "26 Września 2026", homeTime: "Godzina 11:00", saveDate: "Zapisz datę",
     days: "dni", hours: "godziny", minutes: "minuty", seconds: "sekundy",
@@ -219,7 +219,7 @@ function setLanguage(lang) {
     safeSetText('a[href="#home"]', t.navHome);
     safeSetText('a[href="#cerimonia"]', t.navCerimonia);
     safeSetText('a[href="#location"]', t.navLocation);
-    safeSetText('a[href="#alloggio "]', t.navAlloggio); 
+    safeSetText('a[href="#alloggio "]', t.navAlloggio);
     safeSetText('a[href="#alatri"]', t.navAlatri);
     safeSetText('a[href="#rsvp"]', t.navRsvp);
     safeSetText('a[href="#foto"]', t.navFoto);
@@ -246,7 +246,7 @@ function setLanguage(lang) {
     safeSetText('#cerimonia .section-intro p', t.cerimoniaDesc);
     safeSetText('#cerimonia .location-details h3', t.locCerimoniaNome);
     safeSetText('#cerimonia .button', t.portamiLi);
-    
+
     safeSetText('#location .section-intro h2', t.locationTitle);
     safeSetText('#location .section-intro p', t.locationDesc);
     safeSetText('#location .location-details h3', t.locRicevimentoNome);
@@ -294,12 +294,12 @@ function setLanguage(lang) {
       const p_0 = finalCards[0].querySelector('p');
       if (h3_0) h3_0.textContent = t.serenataTitle;
       if (p_0) p_0.textContent = t.serenataText;
-      
+
       const h3_1 = finalCards[1].querySelector('h3');
       const p_1 = finalCards[1].querySelector('p');
       if (h3_1) h3_1.textContent = t.pranzoTitle;
       if (p_1) p_1.textContent = t.pranzoText;
-      
+
       const h3_2 = finalCards[2].querySelector('h3');
       const p_2 = finalCards[2].querySelector('p');
       if (h3_2) h3_2.textContent = t.vodkaTitle;
@@ -316,18 +316,18 @@ function setLanguage(lang) {
     safeSetText('#rsvpForm .radio-row > span', t.partecipiLabel);
     safeSetText('#rsvpForm .radio-row label:first-of-type span', t.si);
     safeSetText('#rsvpForm .radio-row label:nth-of-type(2) span', t.no);
-    
+
     const rsvpLabels = document.querySelectorAll('#rsvpForm > label > span');
     if (rsvpLabels.length >= 3) {
-       rsvpLabels[0].textContent = t.ospitiLabel;
-       rsvpLabels[1].textContent = t.allergieLabel;
-       rsvpLabels[2].textContent = t.messaggioLabel;
+      rsvpLabels[0].textContent = t.ospitiLabel;
+      rsvpLabels[1].textContent = t.allergieLabel;
+      rsvpLabels[2].textContent = t.messaggioLabel;
     }
-    
+
     safeSetPlaceholder('#rsvpForm input[name="diet"]', t.allergiePlaceholder);
     safeSetPlaceholder('#rsvpForm textarea[name="message"]', t.messaggioPlaceholder);
     safeSetText('#rsvpForm button[type="submit"]', t.invia);
-    safeSetText('#rsvpForm .form-note', t.rsvpDeadline); 
+    safeSetText('#rsvpForm .form-note', t.rsvpDeadline);
 
     // Foto
     safeSetText('#foto .section-intro h2', t.fotoTitle);
@@ -347,16 +347,16 @@ function setLanguage(lang) {
     }
 
     // NUOVA LOGICA: Gestione icone IBAN e testo IBAN
-      const ibanCont = document.getElementById('iban-container');
-      const polishIcons = document.getElementById('polish-icons');
+    const ibanCont = document.getElementById('iban-container');
+    const polishIcons = document.getElementById('polish-icons');
 
-     if (lang === 'pl') {
-     if (ibanCont) ibanCont.style.display = 'none'; // Nasconde l'IBAN
-     if (polishIcons) polishIcons.style.display = 'flex'; // Mostra le icone
-     } else {
-     if (ibanCont) ibanCont.style.display = 'block'; // Mostra l'IBAN
-     if (polishIcons) polishIcons.style.display = 'none'; // Nasconde le icone
-     }
+    if (lang === 'pl') {
+      if (ibanCont) ibanCont.style.display = 'none'; // Nasconde l'IBAN
+      if (polishIcons) polishIcons.style.display = 'flex'; // Mostra le icone
+    } else {
+      if (ibanCont) ibanCont.style.display = 'block'; // Mostra l'IBAN
+      if (polishIcons) polishIcons.style.display = 'none'; // Nasconde le icone
+    }
 
     document.querySelectorAll('.section-intro h2').forEach(h2 => {
       if (h2.textContent.includes("Grazie di cuore") || h2.textContent.includes("Dziękujemy")) {

@@ -106,10 +106,6 @@ textarea {
   justify-content: center;
 }
 
-.section-programma {
-  display: none;
-}
-
 .organetto {
   margin: auto;
 }
@@ -215,7 +211,7 @@ textarea {
 }
 
 .section {
-  padding: 5rem 2rem;
+  padding: 5rem 2rem 0;
 }
 
 .section-intro {
@@ -246,6 +242,8 @@ textarea {
 }
 
 .info-flex {
+  margin: auto;
+  max-width: 960px;
   display: flex;
   justify-content: center;
 }
@@ -270,6 +268,7 @@ textarea {
 .location-details {
   display: grid;
   gap: 1.5rem;
+  text-align: center;
 }
 
 .location-details h3 {
@@ -521,13 +520,43 @@ textarea {
 
 .info-icon {
   font-size: 2.4rem;
+  margin: auto;
+}
+
+#polish-icons {
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+#polish-icons .no-regali {
+  width: 250px;
+  height: 100px;
+  background: url('no-regali.svg') no-repeat center;
+}
+
+#polish-icons .no-fiori {
+  width: 250px;
+  height: 100px;
+  background: url('no-fiori.svg') no-repeat center;
 }
 
 .alloggio-note {
+  display: flex;
+  gap: 30px;
   padding: 1.5rem;
   border-radius: 1.5rem;
   background: rgba(121, 132, 121, 0.06);
   color: var(--accent-dark);
+}
+
+.alloggio-note p {
+  text-align: center;
+}
+
+.alloggio-note a {
+  margin-bottom: 10px;
 }
 
 .color-palette {
@@ -570,10 +599,6 @@ textarea {
 .final-icon {
   font-size: 2.5rem;
   margin-bottom: 0.5rem;
-}
-
-.final-card h3 {
-  margin: 0;
 }
 
 .final-card p {
@@ -634,9 +659,7 @@ p.justify {
     flex-direction: column;
     gap: 0;
   }
-}
 
-@media(max-width: 640px) {
   .home-bg {
     height: 130vw;
     min-height: 380px;
@@ -652,6 +675,10 @@ p.justify {
 
   .countdown strong {
     font-size: 1rem;
+  }
+
+  p.justify {
+    text-align: left;
   }
 }
 
@@ -678,5 +705,9 @@ p.justify {
 
   .radio-row label {
     width: 100%;
+  }
+
+  .alloggio-note {
+    flex-direction: column;
   }
 }
