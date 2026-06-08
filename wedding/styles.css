@@ -680,6 +680,14 @@ p.justify {
   p.justify {
     text-align: left;
   }
+
+  .card-iban {
+    padding: 25px;
+  }
+
+  #iban-container h3 {
+    font-size: 0.8em;
+  }
 }
 
 @media (max-width: 960px) {
