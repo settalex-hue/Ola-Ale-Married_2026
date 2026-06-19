@@ -169,7 +169,7 @@ const translations = {
     locRicevimentoNome: "Villa Il Sogno - Piglio, FR",
     portamiLi: "Zabierz mnie tam",
     alloggioTitle: "Nocleg",
-    alloggioText: "Dla osób przybywających z daleka przygotowaliśmy kilka polecanych obiektów w okolicy, aby ułatwić planowanie pobytu. Kontaktując się z wybranym miejscem, pamiętaj, aby wspomnieć, że jesteś gościem na naszym ślubie: zostanie naliczona zniżka, jednak dostępność pokoi zależy od wcześniejszych rezerwacji. Zalecamy więc wcześniejsze zarezerwowanie noclegu, aby spokojnie wybrać najwygodniejsze rozwiązanie.",
+    alloggioText: "Dla osób przybywających z daleka przygotowaliśmy listę polecanych noclegów w okolicy, co ułatwi planowanie pobytu. Kontaktując się z danym miejscem, warto wspomnieć o naszym ślubie, co pozwoli na uzyskanie zniżki. Pamiętaj jednak, że dostępność pokoi zależy od dokonanych rezerwacji. Zalecamy więc szybsze zabezpieczenie miejsca, aby spokojnie znaleźć najwygodniejsze rozwiązanie.",
     alatriTitle: "Alatri",
     alatriText1: "Alatri to miasto, w którym dorastaliśmy. To miejsce, gdzie nasze ścieżki skrzyżowały się przypadkiem, by połączyć się na zawsze. Leży w sercu Ciociarii —historycznego regionu południowego Lacjum— pełnego tradycji, folkloru, urokliwych miasteczek i smaków, które kojarzą się z domem. Jeśli będziesz mieć okazję zostać tu nieco dłużej, polecamy odkryć je na spokojnie i zatrzymać się na kufel piwa w pubie Guinness, gdzie wszystko się zaczęło.",
     alatriText2: "Pomysły i plany podróży znajdziesz tutaj:",
